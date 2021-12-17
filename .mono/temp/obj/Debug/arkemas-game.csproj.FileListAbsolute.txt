@@ -1,0 +1,9 @@
+C:\Users\souls\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas-game.csproj.AssemblyReference.cache
+C:\Users\souls\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas-game.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\souls\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas-game.AssemblyInfoInputs.cache
+C:\Users\souls\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas-game.AssemblyInfo.cs
+C:\Users\souls\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas-game.csproj.CoreCompileInputs.cache
+C:\Users\souls\Documents\GitHub\arkemas-game\.mono\temp\bin\Debug\arkemas-game.dll
+C:\Users\souls\Documents\GitHub\arkemas-game\.mono\temp\bin\Debug\arkemas-game.pdb
+C:\Users\souls\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas-game.dll
+C:\Users\souls\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas-game.pdb
