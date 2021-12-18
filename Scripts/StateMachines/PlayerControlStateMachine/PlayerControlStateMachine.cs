@@ -7,6 +7,8 @@ using System.Collections.Generic;
 
 public class PlayerControlStateMachine : _DefaultStateMachine
 {
+	private Vector2 _lastDirection = Vector2.Down;
+	public Vector2 Direction { get {return  CheckDirection(); } }
 
 	public override void _Ready()
 	{
@@ -21,5 +23,16 @@ public class PlayerControlStateMachine : _DefaultStateMachine
 		}
 
 		ChangeState(playerControlStates[0].Name);
+	}
+
+	private Vector2 CheckDirection()
+	{
+		Vector2 movementVector = (Vector2) GetNode<Node>("States/MovementState").Get("Direction");
+		Vector2 attackVector = (Vector2) GetNode<Node>("States/AttackState").Get("Direction");
+		
+		_lastDirection = attackVector == Vector2.Zero ? _lastDirection: attackVector;
+		_lastDirection = movementVector == Vector2.Zero ? _lastDirection: movementVector;
+		
+		return _lastDirection;
 	}
 }

@@ -4,57 +4,48 @@ using System.Collections.Generic;
 
 public class MovementState : PlayerControlState
 {
-	public Vector2 Velocity;
-	
-	private float MaxMovementSpeed = 250;
-	private float MovementSpeed = 250;
+	[Signal] public delegate void StateUpdateOver();
+
+	public Vector2 Direction;
+
+	private float MovementSpeed = 400;
 	
 	private KinematicBody2D kb;
 	
 	public override void _Ready()
 	{
-		base._Ready();
 		kb = GetNode<KinematicBody2D>("../../../KinematicBody2D");
-	}
-
-	public override void OnStart(Dictionary<string, object> message)
-	{
-		base.OnStart(message);
-		GD.Print("Movement state started");
+		Direction = Vector2.Down;
 	}
 
 	public override void UpdateState(float delta)
 	{
-		Velocity = Vector2.Zero;
+		Vector2 _velocity = Vector2.Zero;
 
-		// movement
 		if (Input.IsActionPressed("movement_right"))
-			Velocity.x += 1;
+			_velocity.x += 1;
 		if (Input.IsActionPressed("movement_left"))
-			Velocity.x += -1;
+			_velocity.x -= 1;
 		if (Input.IsActionPressed("movement_up"))
-			Velocity.y += -1;
+			_velocity.y -= 1;
 		if (Input.IsActionPressed("movement_down"))
-			Velocity.y += 1;
-				
-		Velocity = Velocity.Normalized();
+			_velocity.y += 1;
+
+		Direction = _velocity == Vector2.Zero ? Direction : _velocity;
+
+		_velocity = _velocity.Normalized();
+		kb.MoveAndSlide( _velocity * MovementSpeed );
+
+		if (Input.IsActionJustPressed("attack_click")) PCSM.ChangeState("AttackState");
+		if ( _velocity == Vector2.Zero) PCSM.ChangeState("IdleState");
 		
-		kb.MoveAndSlide( Velocity * MovementSpeed );
-		
-		if (Velocity == Vector2.Zero)
-			PCSM.ChangeState("IdleState");
-		
-		UpdateFacingDirection();
+		OnUpdate();
 	}
 
 	public override void OnExit(string nextState)
 	{
 		base.OnExit(nextState);
-	}
 
-	public void UpdateFacingDirection()
-	{
-		// need to change Actor's Direction
-
+		Direction = Vector2.Zero;
 	}
 }
