@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class _DefaultState : Node
 {
-	private bool Initialized = false;
+	public bool Active = false;
 	private bool OnUpdateHasFired = false;
 	
 	[Signal] public delegate void StateStart();
@@ -14,12 +14,12 @@ public class _DefaultState : Node
 	public virtual void OnStart(Dictionary<string, object> message)
 	{
 		EmitSignal(nameof(StateStart));
-		Initialized = true;
+		Active = true;
 	}
 
 	public virtual void OnUpdate()
 	{
-		if (!Initialized)
+		if (!Active)
 			return;
 		EmitSignal(nameof(StateUpdated));
 		OnUpdateHasFired = true;
@@ -33,10 +33,10 @@ public class _DefaultState : Node
 
 	public virtual void OnExit(string nextState)
 	{
-		if (!Initialized)
+		if (!Active)
 			return;
 		EmitSignal(nameof(StateExited));
-		Initialized = false;
+		Active = false;
 		OnUpdateHasFired = true;
 	}
 
