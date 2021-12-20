@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pickupImage.png-174ff241e0a9a865e7d83ff9050883a3.stex"
+path="res://.import/barOver.png-6b056a429794b298feb69333bac1710b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/Items/TestLongsword/pickupImage.png"
-dest_files=[ "res://.import/pickupImage.png-174ff241e0a9a865e7d83ff9050883a3.stex" ]
+source_file="res://Assets/Concept/UI Concepts/barOver.png"
+dest_files=[ "res://.import/barOver.png-6b056a429794b298feb69333bac1710b.stex" ]
 
 [params]
 

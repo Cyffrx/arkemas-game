@@ -26,10 +26,5 @@ public class PulseBody : KinematicBody2D
 
     public void _on_Timer_timeout() { QueueFree(); }
 
-    public void _on_Area2D_body_entered(Node body)
-    {
-        GD.Print("Detected collision with " + body.Name + " body.IsInGroup('player') " + body.IsInGroup("player"));
-
-        if (!(body.IsInGroup("player") || body.IsInGroup("pulse_body"))) _on_Timer_timeout();
-    }
+    public void _on_Area2D_body_entered(Node body) { if (!(body.IsInGroup("player") || body.IsInGroup("pulse_body"))) _on_Timer_timeout(); }
 }

@@ -62,6 +62,7 @@ public class PlayerInformation : KinematicBody2D
     {
         base._PhysicsProcess(delta);
 
+        #region spellcasting
         if (Input.IsActionJustPressed("castSpell_recall") && Spells.Contains("RecallSpell"))
         {
             if (!RecallSpellSet) CastSpell_Mark();
@@ -72,6 +73,7 @@ public class PlayerInformation : KinematicBody2D
         {
             CastSpell_Pulse();
         }
+        #endregion
     }
 
     #region pulse spell
@@ -94,9 +96,12 @@ public class PlayerInformation : KinematicBody2D
             PulseBody pulse = (PulseBody) PS_PulseBody.Instance();
             pulse.Visible = true;
             pulse.Position = this.Position + pulseDirectionMapper[i].Normalized() * 50;
-            pulse.Velocity = pulseDirectionMapper[i].Normalized();
+            // pulse.Velocity = pulseDirectionMapper[i].Normalized();
+            // pulse.Velocity = new Vector2((float)Math.Cos(new Vector2(0,1).Angle()*i), (float)Math.Sin(new Vector2(0,1).Angle()*i));
+            // todo: generate the vector based on the pulseResolution
 
             GetNode<Node>("Spells/Pulse").AddChild(pulse);
+            GD.Print(pulse.Velocity.Angle());
         }
     }
     #endregion
