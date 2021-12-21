@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="arkemas-game"
-run/main_scene="res://Scenes/Levels/TestLevel.tscn"
+run/main_scene="res://Scenes and Scripts/Levels/Testing/TestLevel.tscn"
 config/icon="res://icon.png"
 
 [input]

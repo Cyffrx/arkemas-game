@@ -1,0 +1,23 @@
+[gd_scene format=2]
+
+[node name="Level" type="Node2D"]
+
+[node name="TileMaps" type="Node" parent="."]
+
+[node name="Floors" type="TileMap" parent="TileMaps"]
+format = 1
+
+[node name="Floor Decals" type="TileMap" parent="TileMaps"]
+format = 1
+
+[node name="Walls" type="TileMap" parent="TileMaps"]
+format = 1
+
+[node name="WallDecals" type="TileMap" parent="TileMaps"]
+format = 1
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Interactables" type="Node" parent="."]
+
+[node name="Items" type="Node" parent="."]

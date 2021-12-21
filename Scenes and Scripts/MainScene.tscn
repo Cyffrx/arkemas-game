@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="MainScene" type="Node"]
+
+[node name="[UI]" type="CanvasLayer" parent="."]
+
+[node name="[Level]" type="Node2D" parent="."]
+
+[node name="[Player]" type="KinematicBody2D" parent="."]
