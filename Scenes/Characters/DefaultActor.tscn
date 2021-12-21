@@ -1,14 +1,7 @@
 [gd_scene format=2]
 
-[node name="Actor" type="Node"]
+[node name="DefaultActor" type="KinematicBody2D"]
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 
-[node name="States" type="Node" parent="StateMachine"]
-
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
-position = Vector2( 0, -14.649 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

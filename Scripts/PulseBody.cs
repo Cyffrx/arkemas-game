@@ -20,8 +20,7 @@ public class PulseBody : KinematicBody2D
     public override void _PhysicsProcess(float delta)
     {
         base._PhysicsProcess(delta);
-
-        MoveAndSlide(Velocity * Speed);
+		MoveAndSlide(Velocity * Speed);
     }
 
     public void _on_Timer_timeout() { QueueFree(); }
