@@ -1,0 +1,75 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Scenes and Scripts/Characters/CharacterTemplate.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes and Scripts/Characters/Type/Player/ControlStateMachine/Acting.cs" type="Script" id=2]
+[ext_resource path="res://Scenes and Scripts/Characters/Type/Player/ActionStateMachine/ActionStateMachine.cs" type="Script" id=3]
+[ext_resource path="res://Scenes and Scripts/Characters/Type/Player/ControlStateMachine/ControlStateMachine.cs" type="Script" id=4]
+[ext_resource path="res://Scenes and Scripts/Characters/Type/Player/Player.png" type="Texture" id=5]
+[ext_resource path="res://Scenes and Scripts/Characters/Type/Player/ActionStateMachine/Attacking.cs" type="Script" id=6]
+[ext_resource path="res://Scenes and Scripts/Characters/Type/Player/ActionStateMachine/Default.cs" type="Script" id=7]
+[ext_resource path="res://Scenes and Scripts/Characters/Type/Player/ActionStateMachine/Casting.cs" type="Script" id=8]
+[ext_resource path="res://Art Assets/TestArt/Lights/light.png" type="Texture" id=9]
+
+[sub_resource type="CircleShape2D" id=4]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 84, 138 )
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 98.0
+height = 40.0
+
+[node name="Player" instance=ExtResource( 1 )]
+scale = Vector2( 0.5, 0.5 )
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( 0, 95 )
+shape = SubResource( 4 )
+
+[node name="InteractArea" type="Area2D" parent="." index="4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea" index="0"]
+position = Vector2( -46, 0 )
+shape = SubResource( 2 )
+
+[node name="DamageArea" type="Area2D" parent="." index="5"]
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" index="0"]
+position = Vector2( -60, 0 )
+shape = SubResource( 3 )
+
+[node name="ControlStateMachine" type="Node" parent="." index="6"]
+script = ExtResource( 4 )
+
+[node name="Acting" type="Node" parent="ControlStateMachine" index="0"]
+script = ExtResource( 2 )
+
+[node name="Staggered" type="Node" parent="ControlStateMachine" index="1"]
+
+[node name="Timer" type="Timer" parent="ControlStateMachine/Staggered" index="0"]
+wait_time = 0.5
+
+[node name="Dead" type="Node" parent="ControlStateMachine" index="2"]
+
+[node name="ActionStateMachine" type="Node" parent="." index="7"]
+script = ExtResource( 3 )
+
+[node name="Default" type="Node" parent="ActionStateMachine" index="0"]
+script = ExtResource( 7 )
+
+[node name="Attacking" type="Node" parent="ActionStateMachine" index="1"]
+script = ExtResource( 6 )
+
+[node name="Dodging" type="Node" parent="ActionStateMachine" index="2"]
+script = ExtResource( 7 )
+
+[node name="Casting" type="Node" parent="ActionStateMachine" index="3"]
+script = ExtResource( 8 )
+
+[node name="Light2D" type="Light2D" parent="." index="8"]
+texture = ExtResource( 9 )
+energy = 0.5
