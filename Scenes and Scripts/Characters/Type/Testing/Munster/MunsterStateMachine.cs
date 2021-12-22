@@ -11,7 +11,6 @@ public class MunsterStateMachine : _DefaultStateMachine
         base._Ready();
 
         List<MunsterState> munsterStates = this.GetChildren().OfType<MunsterState>().ToList();
-        GD.Print(munsterStates.Count);
         // for (int m = 0; 0 < munsterStates.Count; m++)
         //     munsterStates[m].MSM = this;
         
