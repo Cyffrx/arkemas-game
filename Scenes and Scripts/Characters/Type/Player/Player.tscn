@@ -87,7 +87,7 @@ tracks/5/keys = {
 }
 
 [sub_resource type="Animation" id=20]
-resource_name = "attack"
+resource_name = "attack-chain0"
 length = 0.85
 step = 0.05
 tracks/0/type = "value"
@@ -128,7 +128,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=21]
-resource_name = "attack-combo"
+resource_name = "attack-chain1"
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
@@ -186,7 +186,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=14]
 resource_name = "dodge"
-length = 0.65
+length = 0.35
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -194,7 +195,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 84, 85, 86, 87, 88, 89, 90 ]
@@ -206,7 +207,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.3 ),
+"times": PoolRealArray( 0.05, 0.25 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
@@ -218,14 +219,14 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.1, 0.3 ),
+"times": PoolRealArray( 0.05, 0.25 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
 }
 
 [sub_resource type="Animation" id=15]
-resource_name = "dodge-strike"
+resource_name = "dodge-attack"
 length = 0.75
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -240,7 +241,7 @@ tracks/0/keys = {
 "values": [ 76, 77, 78, 79, 80, 81, 82, 83 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Hitbox:monitoring")
+tracks/1/path = NodePath("DamageArea:monitoring")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -252,7 +253,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Hitbox:visible")
+tracks/2/path = NodePath("DamageArea:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -349,7 +350,7 @@ height = 68.0
 radius = 92.0
 
 [sub_resource type="CircleShape2D" id=12]
-radius = 104.346
+radius = 140.014
 
 [node name="Player" instance=ExtResource( 1 )]
 position = Vector2( 12, -6 )
@@ -416,11 +417,11 @@ vframes = 17
 
 [node name="AnimationPlayer" parent="." index="5"]
 anims/RESET = SubResource( 19 )
-anims/attack = SubResource( 20 )
-anims/attack-combo = SubResource( 21 )
+anims/attack-chain0 = SubResource( 20 )
+anims/attack-chain1 = SubResource( 21 )
 anims/dead = SubResource( 13 )
 anims/dodge = SubResource( 14 )
-anims/dodge-strike = SubResource( 15 )
+anims/dodge-attack = SubResource( 15 )
 anims/idle = SubResource( 16 )
 anims/run = SubResource( 17 )
 anims/stagger = SubResource( 18 )
@@ -437,7 +438,7 @@ visible = false
 texture = ExtResource( 9 )
 energy = 0.5
 
-[node name="Hitbox" parent="." index="9" groups=["player"]]
+[node name="Hitbox" parent="." index="9" groups=["aecarium", "player"]]
 position = Vector2( -4, 2 )
 monitoring = false
 
@@ -456,8 +457,7 @@ shape = SubResource( 11 )
 visible = false
 
 [node name="CollisionShape2D" parent="DamageArea" index="0"]
-position = Vector2( 44, 2 )
-rotation = -0.261799
+position = Vector2( -24, 12 )
 shape = SubResource( 12 )
 
 [connection signal="timeout" from="Stats/AecarialDecay" to="Stats" method="_on_AecarialDecay_timeout"]

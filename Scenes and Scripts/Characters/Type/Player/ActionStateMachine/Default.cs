@@ -1,3 +1,8 @@
+// todo: implement movement acceleration
+// moving initally begins with walking
+// this leads into running
+// dodging into moving will immediately run
+
 using Godot;
 using System;
 using System.Collections.Generic;
@@ -24,8 +29,6 @@ public class Default : ActionState
 		if (Input.IsActionPressed("move_left")) velocity.x -= 1;
 		if (Input.IsActionPressed("move_right")) velocity.x += 1;
 
-		ASM.sprite.FlipH = velocity.x < 0;
-
 		switch (velocity.LengthSquared())
 		{
 			case 0:
@@ -33,9 +36,14 @@ public class Default : ActionState
 			break;
 			default:
 			if (ASM.animPlayer.CurrentAnimation != "run") ASM.animPlayer.Play("run");
-			ASM.kb.MoveAndSlide(velocity.Normalized() * (float) Owner.GetNode<Node>("Stats").Get("RunSpeed"));
+			ASM.kb.MoveAndSlide(velocity.Normalized() * (float) ASM.playerStats.Get("RunSpeed"));
 			break;
 		}
+
+		// animation
+		if (velocity != Vector2.Zero) lastVelocity = velocity;
+		ASM.CheckFlipSprite(lastVelocity);
+
 		#endregion
 
 		#region actions

@@ -10,8 +10,7 @@ public class ActionStateMachine : _DefaultStateMachine
     public Node playerStats;
     public KinematicBody2D kb;
     public Sprite sprite;
-
-
+	
     public override void _Ready()
     {
         base._Ready();
@@ -34,4 +33,12 @@ public class ActionStateMachine : _DefaultStateMachine
 
         if ( (int) playerStats.Get("Aecarium") == 0) {playerStats.Call("Die"); }
     }
+
+	public void CheckFlipSprite(Vector2 facing)
+	{
+		sprite.FlipH = facing.x < 0;
+		if (sprite.FlipH) sprite.Position = new Vector2(-56,0);
+		else sprite.Position = new Vector2(0,0);
+	}
+
 }

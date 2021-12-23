@@ -55,10 +55,10 @@ public class Searching : MunsterState
 		{
 			Node2D potentialTarget = (Node2D) targetPointer.GetCollider();
 			if (potentialTarget.IsInGroup("player") || potentialTarget.IsInGroup("aecarium"))
-			MSM.ChangeState("Chasing", new Dictionary<string, object>() 
-				{
-					{"TargetPositon", kb.ToLocal(potentialTarget.Position)}
-				}
+				MSM.ChangeState("Chasing", new Dictionary<string, object>() 
+					{
+						{"TargetPositon", kb.ToLocal(potentialTarget.Position)}
+					}
 			);
 		}
 	}

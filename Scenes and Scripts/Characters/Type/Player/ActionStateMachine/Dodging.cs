@@ -1,3 +1,8 @@
+// dodging has three substates
+// there's a backwards backstep where you move in the opposite vector of your mouse
+// and there's forwardstepping, where you step towards your mouse
+// and there's sidestepping, where you step perpendicularish to your mouse
+
 using Godot;
 using System;
 using System.Collections.Generic;
@@ -14,12 +19,16 @@ public class Dodging : ActionState
 		
 		if ( (int) ASM.playerStats.Get("Stamina") > 0) 
 		{
-			ASM.playerStats.Set("Stamina", (int)ASM.playerStats.Get("Stamina") - StaminaCost);
-			
+			ASM.playerStats.Set("Stamina", (int) ASM.playerStats.Get("Stamina") - (int) ASM.playerStats.Get("DodgeCost"));
 
-			ASM.animPlayer.Play("dodge");
+			// dodges towards momentum else dodges towards mouse
 			velocity = (Vector2) message["Velocity"];
 			if (velocity == Vector2.Zero) velocity = ASM.kb.GetLocalMousePosition().Normalized();
+
+			ASM.animPlayer.Play("dodge");
+			
+			// will need to convert velocity to one of four directions and then play the subsequent dodge animation
+
 		} else ASM.ChangeState("Default");	
 	}
 
@@ -43,8 +52,7 @@ public class Dodging : ActionState
 	{
 		if (animName == "dodge")
 		{
-			GD.Print("dodge finish");
-			if (attackAfterDodge) ASM.ChangeState("Attacking", new Dictionary<string, object>(){{"dodge-strike", true}});
+			if (attackAfterDodge) ASM.ChangeState("Attacking");
 			else ASM.ChangeState("Default");
 		}
 	}
