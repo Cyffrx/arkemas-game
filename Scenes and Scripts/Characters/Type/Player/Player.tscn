@@ -1,318 +1,14 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes and Scripts/Characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Player/ActionStateMachine/Default.cs" type="Script" id=2]
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Player/ActionStateMachine/ActionStateMachine.cs" type="Script" id=3]
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Player/ActionStateMachine/Dodging.cs" type="Script" id=4]
-[ext_resource path="res://Art Assets/TestArt/Characters/Hero Knight/Idle.png" type="Texture" id=5]
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Player/ActionStateMachine/Attacking.cs" type="Script" id=6]
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Player/PlayerStats.cs" type="Script" id=7]
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Player/ActionStateMachine/Casting.cs" type="Script" id=8]
 [ext_resource path="res://Art Assets/TestArt/Lights/light.png" type="Texture" id=9]
 [ext_resource path="res://Art Assets/TestArt/Characters/Hero Knight/Fall.png" type="Texture" id=10]
-[ext_resource path="res://Art Assets/TestArt/Characters/Hero Knight/Run.png" type="Texture" id=11]
-[ext_resource path="res://Art Assets/TestArt/Characters/Hero Knight/Attack1.png" type="Texture" id=12]
-
-[sub_resource type="Animation" id=6]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Idle:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 1 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Attack1:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("DamageArea:monitoring")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Idle:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Attack1:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Run:frame")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0 ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("Run:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("Attack1:scale")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1e-05, 1e-05 ) ]
-}
-tracks/8/type = "value"
-tracks/8/path = NodePath("Run:scale")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1e-05, 1e-05 ) ]
-}
-tracks/9/type = "value"
-tracks/9/path = NodePath("Idle:scale")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 3, 3 ) ]
-}
-tracks/10/type = "value"
-tracks/10/path = NodePath("Sprite:frame")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0 ]
-}
-tracks/11/type = "value"
-tracks/11/path = NodePath("Sprite:scale")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 3, 3 ) ]
-}
-tracks/12/type = "value"
-tracks/12/path = NodePath("Hitbox:monitoring")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-
-[sub_resource type="Animation" id=7]
-resource_name = "attack1"
-length = 0.65
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Attack1:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Attack1:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.65 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ Vector2( 3, 3 ), Vector2( 1e-05, 1e-05 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("DamageArea:monitoring")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.3, 0.55 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
-[sub_resource type="Animation" id=13]
-resource_name = "dodge"
-length = 0.25
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.25 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ Vector2( 3, 3 ), Vector2( 1e-05, 1e-05 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Hitbox:monitoring")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.05, 0.15 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-
-[sub_resource type="Animation" id=5]
-resource_name = "idle"
-length = 1.05
-loop = true
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Idle:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Idle:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1.05 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ Vector2( 3, 3 ), Vector2( 1e-05, 1e-05 ) ]
-}
-
-[sub_resource type="Animation" id=9]
-resource_name = "run"
-length = 0.75
-loop = true
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Run:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Run:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.75 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ Vector2( 3, 3 ), Vector2( 1e-05, 1e-05 ) ]
-}
 
 [sub_resource type="CircleShape2D" id=4]
 
@@ -331,7 +27,7 @@ scale = Vector2( 0.5, 0.5 )
 [node name="Stats" parent="." index="0"]
 script = ExtResource( 7 )
 
-[node name="ActionStateMachine" type="Node" parent="." index="1"]
+[node name="ActionStateMachine" type="Node" parent="." index="2"]
 script = ExtResource( 3 )
 
 [node name="Default" type="Node" parent="ActionStateMachine" index="0"]
@@ -353,72 +49,43 @@ wait_time = 0.5
 
 [node name="Dead" type="Node" parent="ActionStateMachine" index="5"]
 
-[node name="Idle" type="Sprite" parent="." index="2"]
-position = Vector2( -16, 2 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 5 )
-hframes = 11
-frame = 1
-
-[node name="Run" type="Sprite" parent="." index="3"]
-position = Vector2( -10, 2 )
-scale = Vector2( 1e-05, 1e-05 )
-texture = ExtResource( 11 )
-hframes = 8
-
-[node name="Attack1" type="Sprite" parent="." index="4"]
-position = Vector2( 18, 4 )
-scale = Vector2( 1e-05, 1e-05 )
-texture = ExtResource( 12 )
-hframes = 7
-
-[node name="Sprite" parent="." index="5"]
-position = Vector2( 0, 40 )
-rotation = 5.23599
-scale = Vector2( 3, 3 )
+[node name="Sprite" parent="." index="3"]
 texture = ExtResource( 10 )
 hframes = 3
 
-[node name="AnimationPlayer" parent="." index="6"]
-anims/RESET = SubResource( 6 )
-anims/attack1 = SubResource( 7 )
-anims/dodge = SubResource( 13 )
-anims/idle = SubResource( 5 )
-anims/run = SubResource( 9 )
-
-[node name="AnimationTree" parent="." index="7"]
+[node name="AnimationTree" parent="." index="5"]
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="CollisionShape2D" parent="." index="8"]
+[node name="CollisionShape2D" parent="." index="6"]
 position = Vector2( 26, 86 )
 shape = SubResource( 4 )
 
-[node name="Hitbox" parent="." index="9" groups=["player"]]
+[node name="Hitbox" parent="." index="7" groups=["player"]]
 visible = false
 monitoring = false
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 10 )
 
-[node name="InteractionZone" parent="." index="10"]
+[node name="InteractionZone" parent="." index="8"]
 visible = false
 monitoring = false
 
 [node name="CollisionShape2D" parent="InteractionZone" index="0"]
 shape = SubResource( 11 )
 
-[node name="DamageArea" parent="." index="11"]
+[node name="Light2D" type="Light2D" parent="." index="9"]
+visible = false
+texture = ExtResource( 9 )
+energy = 0.5
+
+[node name="DamageArea" parent="." index="10"]
 visible = false
 
 [node name="CollisionShape2D" parent="DamageArea" index="0"]
 position = Vector2( 32, 2 )
 rotation = -0.261799
 shape = SubResource( 12 )
-
-[node name="Light2D" type="Light2D" parent="." index="12"]
-visible = false
-texture = ExtResource( 9 )
-energy = 0.5
 
 [connection signal="animation_finished" from="AnimationPlayer" to="ActionStateMachine/Attacking" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="ActionStateMachine/Dodging" method="_on_AnimationPlayer_animation_finished"]

@@ -7,26 +7,30 @@ public class Dodging : ActionState
 	private bool attackAfterDodge = false;
 	private Vector2 velocity;
 	private KinematicBody2D kb;
-	[Export] private int StaminaRequirement = 10;
+	[Export] private int StaminaCost = 1;
+	Node playerStats;
 
 	public override void _Ready()
 	{
 		base._Ready();
 		kb = (KinematicBody2D) Owner;
+		playerStats = Owner.GetNode<Node>("Stats");
 	}
 
 	public override void OnStart(Dictionary<string, object> message)
 	{
 		base.OnStart(message);
 		
-		// put this into a stat check somehow
-		
-		if ( (int) Owner.GetNode<Node>("Stats").Get("Stamina.Value") < StaminaRequirement) ASM.ChangeState("Default");
-		else Owner.GetNode<Node>("Stats").Set("Stamina.Value", -StaminaRequirement);
+		if ( (int) playerStats.Get("Stamina") > 0) 
+		{
+			playerStats.Set("Stamina", -StaminaCost);
 
-		ASM.animPlayer.Play("dodge");
-		velocity = (Vector2) message["Velocity"];
-		if (velocity == Vector2.Zero) velocity = kb.GetLocalMousePosition().Normalized();
+			ASM.animPlayer.Play("dodge");
+			velocity = (Vector2) message["Velocity"];
+			if (velocity == Vector2.Zero) velocity = kb.GetLocalMousePosition().Normalized();
+		} else ASM.ChangeState("Default");
+		
+		
 	}
 
 	public override void UpdateState(float _delta)

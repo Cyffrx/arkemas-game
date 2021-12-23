@@ -8,10 +8,7 @@
 
 [node name="TheWarren" parent="." instance=ExtResource( 3 )]
 
-[node name="[UI]" type="CanvasLayer" parent="."]
-pause_mode = 2
-
-[node name="GlobalUIControls" type="Node" parent="."]
+[node name="GUI" type="CanvasLayer" parent="."]
 pause_mode = 2
 script = ExtResource( 1 )
 
