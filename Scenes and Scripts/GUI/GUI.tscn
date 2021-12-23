@@ -1,13 +1,47 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes and Scripts/GUI/Main Menu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes and Scripts/GUI/Pause Menu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes and Scripts/GUI/HUD.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes and Scripts/GUI/GUIStateMachine.cs" type="Script" id=4]
+[ext_resource path="res://Scenes and Scripts/GUI/MainMenu.cs" type="Script" id=5]
+[ext_resource path="res://Scenes and Scripts/GUI/HUD.cs" type="Script" id=6]
+[ext_resource path="res://Scenes and Scripts/GUI/PauseMenu.cs" type="Script" id=7]
 
 [node name="GUI" type="CanvasLayer"]
 
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="MainMenu" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+
+[node name="HUD" type="Node" parent="StateMachine"]
+script = ExtResource( 6 )
+
+[node name="PauseMenu" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+
 [node name="Main Menu" parent="." instance=ExtResource( 1 )]
+pause_mode = 2
+visible = false
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
+visible = false
 
 [node name="Pause Menu" parent="." instance=ExtResource( 2 )]
+pause_mode = 2
+visible = false
+
+[node name="Settings" parent="Pause Menu/VBoxContainer" index="2"]
+visible = false
+
+[connection signal="pressed" from="Main Menu/VBoxContainer/Continue" to="StateMachine/MainMenu" method="_on_Continue_pressed"]
+[connection signal="pressed" from="Main Menu/VBoxContainer/Exit" to="StateMachine/MainMenu" method="_on_Exit_pressed"]
+[connection signal="pressed" from="Pause Menu/VBoxContainer/Resume" to="StateMachine/PauseMenu" method="_on_Resume_pressed"]
+[connection signal="pressed" from="Pause Menu/VBoxContainer/Main Menu" to="StateMachine/PauseMenu" method="_on_Main_Menu_pressed"]
+[connection signal="pressed" from="Pause Menu/VBoxContainer/Exit" to="StateMachine/PauseMenu" method="_on_Exit_pressed"]
+
+[editable path="Main Menu"]
+[editable path="HUD"]
+[editable path="Pause Menu"]

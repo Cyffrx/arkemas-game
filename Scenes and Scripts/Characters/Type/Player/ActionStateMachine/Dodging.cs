@@ -6,41 +6,31 @@ public class Dodging : ActionState
 {
 	private bool attackAfterDodge = false;
 	private Vector2 velocity;
-	private KinematicBody2D kb;
 	[Export] private int StaminaCost = 1;
-	Node playerStats;
-
-	public override void _Ready()
-	{
-		base._Ready();
-		kb = (KinematicBody2D) Owner;
-		playerStats = Owner.GetNode<Node>("Stats");
-	}
 
 	public override void OnStart(Dictionary<string, object> message)
 	{
 		base.OnStart(message);
 		
-		if ( (int) playerStats.Get("Stamina") > 0) 
+		if ( (int) ASM.playerStats.Get("Stamina") > 0) 
 		{
-			playerStats.Set("Stamina", -StaminaCost);
+			ASM.playerStats.Set("Stamina", (int)ASM.playerStats.Get("Stamina") - StaminaCost);
+			
 
 			ASM.animPlayer.Play("dodge");
 			velocity = (Vector2) message["Velocity"];
-			if (velocity == Vector2.Zero) velocity = kb.GetLocalMousePosition().Normalized();
-		} else ASM.ChangeState("Default");
-		
-		
+			if (velocity == Vector2.Zero) velocity = ASM.kb.GetLocalMousePosition().Normalized();
+		} else ASM.ChangeState("Default");	
 	}
 
 	public override void UpdateState(float _delta)
 	{
 		base.UpdateState(_delta);
 
-		if (!attackAfterDodge) attackAfterDodge = Input.IsActionJustPressed("action_attack");
+		if (Input.IsActionJustPressed("action_attack")) attackAfterDodge = true;
 
 		// might draw an arrow pointing in the dodge direction
-		kb.MoveAndSlide((float) Owner.GetNode<Node>("Stats").Get("DodgeSpeed") * velocity.Normalized());
+		ASM.kb.MoveAndSlide((float) ASM.playerStats.Get("DodgeSpeed") * velocity.Normalized());
 	}
 
 	public override void OnExit(string nextState)
@@ -53,8 +43,9 @@ public class Dodging : ActionState
 	{
 		if (animName == "dodge")
 		{
-			if (attackAfterDodge) ASM.ChangeState("Attacking");
+			GD.Print("dodge finish");
+			if (attackAfterDodge) ASM.ChangeState("Attacking", new Dictionary<string, object>(){{"dodge-strike", true}});
 			else ASM.ChangeState("Default");
-		}			
+		}
 	}
 }

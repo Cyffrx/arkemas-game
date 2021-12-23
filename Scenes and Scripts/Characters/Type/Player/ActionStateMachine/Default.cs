@@ -5,17 +5,11 @@ using System.Collections.Generic;
 public class Default : ActionState
 {
 	private Vector2 lastVelocity;
-	private KinematicBody2D kb;
-
 	public override void _Ready()
 	{
 		base._Ready();
 		
 		lastVelocity = Vector2.Down;
-		kb = (KinematicBody2D) Owner;
-
-		Owner.GetNode<Sprite>("Idle").Scale = new Vector2(3,3);	// temporary as i don't currently have a full spritesheet
-		Owner.GetNode<Sprite>("Run").Scale = new Vector2(3,3);	// temporary as i don't currently have a full spritesheet
 	}
 
 	public override void UpdateState(float _delta)
@@ -27,8 +21,10 @@ public class Default : ActionState
 		#region movement
 		if (Input.IsActionPressed("move_up")) velocity.y -= 1;
 		if (Input.IsActionPressed("move_down")) velocity.y += 1;
-		if (Input.IsActionPressed("move_left")) {velocity.x -= 1;}
+		if (Input.IsActionPressed("move_left")) velocity.x -= 1;
 		if (Input.IsActionPressed("move_right")) velocity.x += 1;
+
+		ASM.sprite.FlipH = velocity.x < 0;
 
 		switch (velocity.LengthSquared())
 		{
@@ -37,7 +33,7 @@ public class Default : ActionState
 			break;
 			default:
 			if (ASM.animPlayer.CurrentAnimation != "run") ASM.animPlayer.Play("run");
-			kb.MoveAndSlide(velocity.Normalized() * (float) Owner.GetNode<Node>("Stats").Get("RunSpeed"));
+			ASM.kb.MoveAndSlide(velocity.Normalized() * (float) Owner.GetNode<Node>("Stats").Get("RunSpeed"));
 			break;
 		}
 		#endregion
@@ -60,7 +56,5 @@ public class Default : ActionState
 	public override void OnExit(string nextState)
 	{
 		base.OnExit(nextState);
-		Owner.GetNode<Sprite>("Idle").Scale = new Vector2(0,0);	// temporary as i don't currently have a full spritesheet
-		Owner.GetNode<Sprite>("Run").Scale = new Vector2(0,0);	// temporary as i don't currently have a full spritesheet
 	}
 }

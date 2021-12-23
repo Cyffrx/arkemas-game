@@ -1,33 +1,391 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes and Scripts/Characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Player/ActionStateMachine/Default.cs" type="Script" id=2]
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Player/ActionStateMachine/ActionStateMachine.cs" type="Script" id=3]
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Player/ActionStateMachine/Dodging.cs" type="Script" id=4]
+[ext_resource path="res://Art Assets/TestArt/Characters/Warrior/Warrior.png" type="Texture" id=5]
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Player/ActionStateMachine/Attacking.cs" type="Script" id=6]
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Player/PlayerStats.cs" type="Script" id=7]
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Player/ActionStateMachine/Casting.cs" type="Script" id=8]
 [ext_resource path="res://Art Assets/TestArt/Lights/light.png" type="Texture" id=9]
-[ext_resource path="res://Art Assets/TestArt/Characters/Hero Knight/Fall.png" type="Texture" id=10]
+[ext_resource path="res://Scenes and Scripts/Characters/Type/Player/PlayerStateReader.cs" type="Script" id=10]
+
+[sub_resource type="Animation" id=19]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("InteractionZone:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DamageArea:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("DamageArea:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Hitbox:monitoring")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Hitbox:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "attack"
+length = 0.85
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 14, 15, 16, 17, 18, 19, 20, 21, 22 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DamageArea:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DamageArea:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "attack-combo"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 23, 24, 25 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DamageArea:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DamageArea:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "dead"
+length = 1.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36 ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "dodge"
+length = 0.65
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 84, 85, 86, 87, 88, 89, 90 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Hitbox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Hitbox:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "dodge-strike"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 76, 77, 78, 79, 80, 81, 82, 83 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Hitbox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Hitbox:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "idle"
+length = 0.55
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "run"
+length = 0.75
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 8, 9, 10, 11, 12, 13 ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "stagger"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 37, 38, 39, 40 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Hitbox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Hitbox:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
 [sub_resource type="CircleShape2D" id=4]
 
 [sub_resource type="CapsuleShape2D" id=10]
-radius = 54.0
+radius = 34.0
+height = 68.0
 
 [sub_resource type="CapsuleShape2D" id=11]
 radius = 92.0
 
 [sub_resource type="CircleShape2D" id=12]
-radius = 95.0368
+radius = 104.346
 
 [node name="Player" instance=ExtResource( 1 )]
+position = Vector2( 12, -6 )
 scale = Vector2( 0.5, 0.5 )
 
-[node name="Stats" parent="." index="0"]
+[node name="Label" type="Label" parent="." index="0"]
+margin_left = -82.0
+margin_top = -102.0
+margin_right = -42.0
+margin_bottom = -88.0
+rect_scale = Vector2( 2.90721, 2.90721 )
+text = "State"
+align = 1
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stats" parent="." index="1"]
 script = ExtResource( 7 )
 
-[node name="ActionStateMachine" type="Node" parent="." index="2"]
+[node name="AecarialDecay" type="Timer" parent="Stats" index="0"]
+wait_time = 10.0
+autostart = true
+
+[node name="HealthRegen" type="Timer" parent="Stats" index="1"]
+wait_time = 5.0
+autostart = true
+
+[node name="StaminaRegen" type="Timer" parent="Stats" index="2"]
+wait_time = 2.0
+autostart = true
+
+[node name="ReportStats" type="Timer" parent="Stats" index="3"]
+
+[node name="ActionStateMachine" type="Node" parent="." index="3"]
 script = ExtResource( 3 )
 
 [node name="Default" type="Node" parent="ActionStateMachine" index="0"]
@@ -49,44 +407,63 @@ wait_time = 0.5
 
 [node name="Dead" type="Node" parent="ActionStateMachine" index="5"]
 
-[node name="Sprite" parent="." index="3"]
-texture = ExtResource( 10 )
-hframes = 3
+[node name="Sprite" parent="." index="4"]
+position = Vector2( 0, -6 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 5 )
+hframes = 6
+vframes = 17
 
-[node name="AnimationTree" parent="." index="5"]
+[node name="AnimationPlayer" parent="." index="5"]
+anims/RESET = SubResource( 19 )
+anims/attack = SubResource( 20 )
+anims/attack-combo = SubResource( 21 )
+anims/dead = SubResource( 13 )
+anims/dodge = SubResource( 14 )
+anims/dodge-strike = SubResource( 15 )
+anims/idle = SubResource( 16 )
+anims/run = SubResource( 17 )
+anims/stagger = SubResource( 18 )
+
+[node name="AnimationTree" parent="." index="6"]
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="CollisionShape2D" parent="." index="6"]
-position = Vector2( 26, 86 )
+[node name="CollisionShape2D" parent="." index="7"]
+position = Vector2( -16, 58 )
 shape = SubResource( 4 )
 
-[node name="Hitbox" parent="." index="7" groups=["player"]]
-visible = false
-monitoring = false
-
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 10 )
-
-[node name="InteractionZone" parent="." index="8"]
-visible = false
-monitoring = false
-
-[node name="CollisionShape2D" parent="InteractionZone" index="0"]
-shape = SubResource( 11 )
-
-[node name="Light2D" type="Light2D" parent="." index="9"]
+[node name="Light2D" type="Light2D" parent="." index="8"]
 visible = false
 texture = ExtResource( 9 )
 energy = 0.5
 
-[node name="DamageArea" parent="." index="10"]
+[node name="Hitbox" parent="." index="9" groups=["player"]]
+position = Vector2( -4, 2 )
+monitoring = false
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( -24, 10 )
+shape = SubResource( 10 )
+
+[node name="InteractionZone" parent="." index="10"]
+visible = false
+
+[node name="CollisionShape2D" parent="InteractionZone" index="0"]
+position = Vector2( -24, 10 )
+shape = SubResource( 11 )
+
+[node name="DamageArea" parent="." index="11"]
 visible = false
 
 [node name="CollisionShape2D" parent="DamageArea" index="0"]
-position = Vector2( 32, 2 )
+position = Vector2( 44, 2 )
 rotation = -0.261799
 shape = SubResource( 12 )
 
+[connection signal="timeout" from="Stats/AecarialDecay" to="Stats" method="_on_AecarialDecay_timeout"]
+[connection signal="timeout" from="Stats/HealthRegen" to="Stats" method="_on_HealthRegen_timeout"]
+[connection signal="timeout" from="Stats/StaminaRegen" to="Stats" method="_on_StaminaRegen_timeout"]
+[connection signal="timeout" from="Stats/ReportStats" to="Stats" method="_on_ReportStats_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="ActionStateMachine/Attacking" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="ActionStateMachine/Dodging" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="area_entered" from="DamageArea" to="ActionStateMachine/Attacking" method="_on_DamageArea_area_entered"]

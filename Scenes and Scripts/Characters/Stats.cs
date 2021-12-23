@@ -8,6 +8,10 @@ public class ActorStats : Node
 	[Export] public int Health;
 	[Export] public int Stamina;
 	[Export] public int Aecarium;
+
+	[Export] public int MaxHealth;
+	[Export] public int MaxStamina;
+	[Export] public int MaxAecarium;
 	#endregion
 
 	[Export] public float WalkSpeed;

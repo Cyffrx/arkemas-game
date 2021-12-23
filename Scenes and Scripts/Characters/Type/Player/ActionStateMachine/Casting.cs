@@ -6,7 +6,7 @@ public class Casting : ActionState
     public override void UpdateState(float _delta)
     {
         base.UpdateState(_delta);
-        ASM.ChangeState("Idle");
+        ASM.ChangeState("Default");
 		
         // if (    Input.IsActionPressed("move_up")
         //     ||  Input.IsActionPressed("move_down")
