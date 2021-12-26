@@ -1,4 +1,4 @@
-using Godot;
+	using Godot;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -36,8 +36,15 @@ public class Searching : MunsterState
 		kb.MoveAndSlide(Speed * lastDirection.Normalized());
 		TargetCheck();
 	}
-	private void RandomRotateVector(ref Vector2 vector) { vector = vector.Rotated(rng.RandfRange(-2.0f, 2.0f)); }
-	public void _on_Timer_timeout() { RandomRotateVector(ref lastDirection); }
+
+	private void RandomRotateVector(ref Vector2 vector)
+	{
+		vector = vector.Rotated(rng.RandfRange(-2.0f, 2.0f));
+	}
+	public void _on_Timer_timeout()
+	{
+		RandomRotateVector(ref lastDirection);
+	}
 
 	private void RadarBounce()
 	{
@@ -51,15 +58,18 @@ public class Searching : MunsterState
 	private void TargetCheck()
 	{
 		targetPointer.CastTo = lastDirection * 200;
+		
 		if (targetPointer.IsColliding())
 		{
 			Node2D potentialTarget = (Node2D) targetPointer.GetCollider();
+			
 			if (potentialTarget.IsInGroup("player") || potentialTarget.IsInGroup("aecarium"))
+			{
 				MSM.ChangeState("Chasing", new Dictionary<string, object>() 
-					{
-						{"TargetPositon", kb.ToLocal(potentialTarget.Position)}
-					}
-			);
+				{ 
+					{"TargetPosition", kb.ToLocal(potentialTarget.Position)}
+				});
+			}
 		}
 	}
 }

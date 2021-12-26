@@ -19,10 +19,20 @@ radius = 33.0606
 [node name="Munster" instance=ExtResource( 1 )]
 position = Vector2( 473, 297 )
 
-[node name="Stats" parent="." index="0"]
+[node name="StateLabel" type="Label" parent="." index="0"]
+margin_left = -21.0
+margin_top = -48.0
+margin_right = 19.0
+margin_bottom = -34.0
+text = "State"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stats" parent="." index="1"]
 script = ExtResource( 5 )
 
-[node name="StateMachine" type="Node" parent="." index="2"]
+[node name="StateMachine" type="Node" parent="." index="3"]
 script = ExtResource( 3 )
 
 [node name="Searching" type="Node" parent="StateMachine" index="0"]
@@ -35,13 +45,18 @@ autostart = true
 [node name="Chasing" type="Node" parent="StateMachine" index="1"]
 script = ExtResource( 6 )
 
-[node name="Sprite" parent="." index="3"]
+[node name="Sprite" parent="." index="4"]
 texture = ExtResource( 4 )
 
-[node name="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" parent="." index="5"]
 anims/default = SubResource( 1 )
 
-[node name="Radar" type="Node2D" parent="." index="6"]
+[node name="CollisionShape2D" parent="." index="6"]
+position = Vector2( 0, -2 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="Radar" type="Node2D" parent="." index="7"]
 
 [node name="RayCast2D" type="RayCast2D" parent="Radar" index="0"]
 enabled = true
@@ -58,13 +73,11 @@ enabled = true
 rotation = -1.5708
 enabled = true
 
-[node name="TargetPointer" type="RayCast2D" parent="." index="7"]
+[node name="TargetPointer" type="RayCast2D" parent="." index="8"]
+modulate = Color( 1, 0, 0, 1 )
 enabled = true
-
-[node name="CollisionShape2D" parent="." index="8"]
-position = Vector2( 0, -2 )
-rotation = 1.5708
-shape = SubResource( 2 )
+exclude_parent = false
+cast_to = Vector2( 0, 100 )
 
 [node name="Hitbox" parent="." index="9" groups=["enemies", "husk"]]
 

@@ -11,7 +11,13 @@
 [node name="GUI" parent="." instance=ExtResource( 1 )]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 305, 295 )
+
+[node name="AecarialDecay" parent="Player/Stats" index="0"]
+wait_time = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 scale = Vector2( 2, 2 )
 current = true
+
+[editable path="Player"]

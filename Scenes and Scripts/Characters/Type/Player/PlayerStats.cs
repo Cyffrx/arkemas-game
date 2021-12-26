@@ -8,15 +8,20 @@ public class PlayerStats : ActorStats
 	public int DodgeCost = 1;
 	public float Momentum = 0;
 
+	ProgressBar AecariumBar;
+	ProgressBar HealthBar;
+	ProgressBar StaminaBar;
+
+
 	public override void _Ready()
 	{
 		Health = 8;
 		Stamina = 8;
-		Aecarium = 8;
+		Aecarium = 88;
 
 		MaxHealth = 8;
 		MaxStamina = 8;
-		MaxAecarium = 8;
+		MaxAecarium = 88;
 
 		MinHealth = 0;
 		MinStamina = -2;
@@ -26,7 +31,29 @@ public class PlayerStats : ActorStats
 		RunSpeed = 400;
 		DodgeSpeed = 600;
 
+		AecariumBar = GetNode<ProgressBar>("/root/MainScene/GUI/HUD/VBoxContainer/AecariumBar");
+		HealthBar = GetNode<ProgressBar>("/root/MainScene/GUI/HUD/VBoxContainer/HBoxContainer/HealthBar");
+		StaminaBar = GetNode<ProgressBar>("/root/MainScene/GUI/HUD/VBoxContainer/HBoxContainer/StaminaBar");
+
+		AecariumBar.MaxValue = MaxAecarium;
+		HealthBar.MaxValue = MaxHealth;
+		StaminaBar.MaxValue = MaxStamina;
+
+		AecariumBar.Value = Aecarium;
+		HealthBar.Value = Health;
+		StaminaBar.Value = Stamina;
+
 		base._Ready();
+	}
+
+	
+	public override void _Process(float delta)
+	{
+		base._Process(delta);
+
+		AecariumBar.Value = Aecarium;
+		HealthBar.Value = Health;
+		StaminaBar.Value = Stamina;
 	}
 
 	public override void Die()
@@ -40,8 +67,7 @@ public class PlayerStats : ActorStats
 		if (Aecarium <= 0) GD.Print($"{Owner.Name} husked!");
 	}
 
-	public void _on_HealthRegen_timeout()
-	{ if (Health < MaxHealth) Health += 1; }
+	public void _on_HealthRegen_timeout() { if (Health < MaxHealth) Health += 1; }
 
 	public void _on_StaminaRegen_timeout() 
 	{ 
@@ -56,4 +82,5 @@ public class PlayerStats : ActorStats
 		GD.Print($"Health: {Health}");
 		GD.Print($"Stamina: {Stamina}");
 	}
+	
 }

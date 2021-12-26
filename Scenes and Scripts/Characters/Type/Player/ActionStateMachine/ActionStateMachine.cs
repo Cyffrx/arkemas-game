@@ -37,8 +37,16 @@ public class ActionStateMachine : _DefaultStateMachine
 	public void CheckFlipSprite(Vector2 facing)
 	{
 		sprite.FlipH = facing.x < 0;
-		if (sprite.FlipH) sprite.Position = new Vector2(-56,0);
-		else sprite.Position = new Vector2(0,0);
+		if (sprite.FlipH)
+        {
+            sprite.Position = new Vector2(-56,0);
+            Owner.GetNode<CollisionShape2D>("DamageArea/CollisionShape2D").Position = new Vector2(-64,-2);
+        }
+		else
+        {
+            sprite.Position = new Vector2(0,0);
+            Owner.GetNode<CollisionShape2D>("DamageArea/CollisionShape2D").Position = new Vector2(58,-2);
+        }
 	}
 
 }

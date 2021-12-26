@@ -54,6 +54,8 @@ public class Attacking : ActionState
 				// get mouse direction
 				Vector2 mouseDirection = ASM.kb.GetLocalMousePosition().Normalized();
 
+				ASM.CheckFlipSprite(mouseDirection);
+
 				// determine attack direction & set collison box
 				_attackDirectionState = AttackDirectionState.FORWARD;
 				#endregion
@@ -146,7 +148,7 @@ public class Attacking : ActionState
 				#endregion
 			#endregion
 		}
-		else {ASM.ChangeState("Default"); GD.Print("out of stamina");}
+		else ASM.ChangeState("Default");
 	}
 
 	public override void UpdateState(float _delta)
