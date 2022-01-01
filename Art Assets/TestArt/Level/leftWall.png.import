@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/LeftFacingWall.png-58411d601309a6a87ef4455edea3c353.stex"
+path="res://.import/leftWall.png-82a8861fa39bbcbba961fc944c85d37c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art Assets/TestArt/Level/LeftFacingWall.png"
-dest_files=[ "res://.import/LeftFacingWall.png-58411d601309a6a87ef4455edea3c353.stex" ]
+source_file="res://Art Assets/TestArt/Level/leftWall.png"
+dest_files=[ "res://.import/leftWall.png-82a8861fa39bbcbba961fc944c85d37c.stex" ]
 
 [params]
 

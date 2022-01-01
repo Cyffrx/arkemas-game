@@ -442,6 +442,7 @@ shape = SubResource( 10 )
 
 [node name="Light2D" type="Light2D" parent="." index="8"]
 visible = false
+scale = Vector2( 2, 2 )
 texture = ExtResource( 9 )
 energy = 0.5
 

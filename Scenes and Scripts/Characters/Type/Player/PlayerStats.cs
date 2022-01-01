@@ -12,6 +12,8 @@ public class PlayerStats : ActorStats
 	ProgressBar HealthBar;
 	ProgressBar StaminaBar;
 
+	Light2D AecarialLight;
+
 
 	public override void _Ready()
 	{
@@ -43,6 +45,8 @@ public class PlayerStats : ActorStats
 		HealthBar.Value = Health;
 		StaminaBar.Value = Stamina;
 
+		AecarialLight = Owner.GetNode<Light2D>("Light2D");
+
 		base._Ready();
 	}
 
@@ -63,8 +67,10 @@ public class PlayerStats : ActorStats
 	
 	public void _on_AecarialDecay_timeout()
 	{ 
-		Aecarium -= 1; 
-		if (Aecarium <= 0) GD.Print($"{Owner.Name} husked!");
+		Aecarium -= 1;
+		
+		if (Aecarium <= 0) GD.Print($"{Owner.Name} husked!"); // maybe the light radius begins growing again but has a tint and highlights aecarial things?
+		else AecarialLight.Scale = new Vector2((Aecarium*100/MaxAecarium)/100.0f, (Aecarium*100/MaxAecarium)/100.0f)*2;
 	}
 
 	public void _on_HealthRegen_timeout() { if (Health < MaxHealth) Health += 1; }

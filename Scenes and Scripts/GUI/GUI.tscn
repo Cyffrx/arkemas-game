@@ -29,6 +29,25 @@ visible = false
 [node name="HUD" parent="." instance=ExtResource( 3 )]
 visible = false
 
+[node name="HBoxContainer" parent="HUD/VBoxContainer" index="0"]
+margin_bottom = 20.0
+
+[node name="HealthBar" parent="HUD/VBoxContainer/HBoxContainer" index="0"]
+margin_bottom = 20.0
+rect_min_size = Vector2( 375, 20 )
+percent_visible = false
+
+[node name="StaminaBar" parent="HUD/VBoxContainer/HBoxContainer" index="1"]
+margin_bottom = 20.0
+rect_min_size = Vector2( 375, 20 )
+percent_visible = false
+
+[node name="AecariumBar" parent="HUD/VBoxContainer" index="1"]
+margin_top = 24.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 800, 20 )
+percent_visible = false
+
 [node name="Pause Menu" parent="." instance=ExtResource( 2 )]
 pause_mode = 2
 visible = false
