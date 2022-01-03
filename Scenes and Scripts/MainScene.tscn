@@ -22,7 +22,7 @@ energy = 1.0
 shadow_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-scale = Vector2( 2, 2 )
+position = Vector2( -118, -38 )
 current = true
 
 [editable path="Player"]

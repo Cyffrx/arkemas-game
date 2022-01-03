@@ -1,7 +1,3 @@
-// attacks should be changeable / cancelable for about half the startup frames
-// attacks might cost 1 stamina but you can attack without it, it just reduces your damage
-// attacks might have a sweet spot to combo in that gives better or quicker damage
-
 using Godot;
 using System;
 using System.Collections.Generic;
@@ -13,10 +9,10 @@ public class Attacking : ActionState
 
 	private enum AttackDirectionState
 	{
-		FORWARD,
-		LEFTSIDE,
-		RIGHTSIDE,
-		BEHIND
+		DOWN = 0,
+		RIGHT = 1,
+		UP = 2,
+		LEFT = 3
 	}
 
 	private AttackDirectionState _attackDirectionState;
@@ -57,94 +53,16 @@ public class Attacking : ActionState
 				ASM.CheckFlipSprite(mouseDirection);
 
 				// determine attack direction & set collison box
-				_attackDirectionState = AttackDirectionState.FORWARD;
+				_attackDirectionState = AttackDirectionState.RIGHT;
 				#endregion
 
 				#region determine attack
-				// this animation system could work pretty well for a tighter sword-focused game
-				switch (ASM.LastState)
-				{
-					case "Dodging":
-						switch (_attackDirectionState)
-						{
-							case AttackDirectionState.LEFTSIDE:
-							//	play left dodge side strike
-							ASM.animPlayer.Play("dodge-attack");
-							break;
-							case AttackDirectionState.RIGHTSIDE:
-							//	play right dodge side strike
-							ASM.animPlayer.Play("dodge-attack");
-							break;
-							case AttackDirectionState.BEHIND:
-							// play turnaround slash
-							ASM.animPlayer.Play("dodge-attack");
-							break;
-							default:	// forward
-							//	play dodge strike
-							ASM.animPlayer.Play("dodge-attack");
-							break;
-						}
-					break;
-					case "Attacking":
-						switch (_attackDirectionState)
-						{
-							case AttackDirectionState.LEFTSIDE:
-							//	play next combo
-							ASM.animPlayer.Play($"attack-chain{attackChain}");
-							break;
-							case AttackDirectionState.FORWARD:
-							//	play next combo
-							ASM.animPlayer.Play($"attack-chain{attackChain}");
-							break;
-							case AttackDirectionState.BEHIND:
-							//	play turnaround slash slash
-							ASM.animPlayer.Play($"attack-chain{attackChain}");
-							break;
-							default:	// forward
-							//	play next combo
-							ASM.animPlayer.Play($"attack-chain{attackChain}");
-							break;
-						}
-					break;
-					default: // running / walking / idle attack
-						// momentum-based attacks
-						if (ASM.playerStats.Get("Momentum") == ASM.playerStats.Get("RunSpeed"))
-						{
-							switch (_attackDirectionState)
-							{
-								case AttackDirectionState.LEFTSIDE:
-								//	play left side sweep - weak attack while moving
-								ASM.animPlayer.Play("dodge-attack");
-								break;
-								case AttackDirectionState.RIGHTSIDE:
-								//	play right side sweep - weak attack while moving
-								ASM.animPlayer.Play("dodge-attack");
-								break;
-								case AttackDirectionState.BEHIND:
-								//	play spin slash
-								ASM.animPlayer.Play("dodge-attack");
-								break;
-								default:	// forward
-								//	play lunge
-								ASM.animPlayer.Play("dodge-attack");
-								break;
-							}
-						}
-						else {
-							// static attacks
-							switch (_attackDirectionState)
-							{
-								case AttackDirectionState.BEHIND:
-								ASM.animPlayer.Play($"attack-chain{attackChain}");
-								break;
-								default:	// backwards
-								// play turnaorund attack
-								ASM.animPlayer.Play($"attack-chain{attackChain}");
-								break;
-							}
-						}
-					break;
-				}
+				
+				// handles which animations play
+				// animations named by [name]_[direction]_[order]
+				if (ASM.LastState == "Dodging") ASM.animPlayer.Play($"dodge-attack_{(int)_attackDirectionState}_0");
+				else ASM.animPlayer.Play($"attack-chain_{(int)_attackDirectionState}_{attackChain}");
+
 				#endregion
 			#endregion
 		}
