@@ -1,15 +1,17 @@
 [gd_scene format=2]
 
-[node name="Level" type="Node2D"]
+[node name="LevelTemplate" type="Node2D"]
 
 [node name="TileMaps" type="Node" parent="."]
 
-[node name="Floors" type="TileMap" parent="TileMaps"]
+[node name="Navigation2D" type="Navigation2D" parent="TileMaps"]
+
+[node name="Floors" type="TileMap" parent="TileMaps/Navigation2D"]
 mode = 1
 cell_size = Vector2( 64, 32 )
 format = 1
 
-[node name="Floor Decals" type="TileMap" parent="TileMaps"]
+[node name="Floor Decals" type="TileMap" parent="TileMaps/Navigation2D"]
 mode = 1
 cell_size = Vector2( 64, 32 )
 format = 1
@@ -26,6 +28,10 @@ format = 1
 
 [node name="Enemies" type="Node" parent="."]
 
-[node name="Interactables" type="Node" parent="."]
-
 [node name="Items" type="Node" parent="."]
+
+[node name="Scripting" type="Node" parent="."]
+
+[node name="Interactables" type="Node" parent="Scripting"]
+
+[node name="Triggers" type="Node" parent="Scripting"]

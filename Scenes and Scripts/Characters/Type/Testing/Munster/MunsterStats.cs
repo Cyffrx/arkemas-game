@@ -5,10 +5,8 @@ public class MunsterStats : ActorStats
 {
    public override void _Ready()
 	{
-		Health = 1;
-		Stamina = 1;
-		Aecarium = -1;
-
+		Health = new Stat("Health", 2,0,2);
+		
 		WalkSpeed = 50;
 		RunSpeed = 200;
 		DodgeSpeed = 400;
