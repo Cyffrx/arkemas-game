@@ -13,10 +13,7 @@
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 2038, -1728 )
 
-[node name="AecarialDecay" parent="Player/Stats" index="0"]
-wait_time = 1.0
-
-[node name="Light2D" parent="Player" index="8"]
+[node name="Light2D" parent="Player" index="5"]
 visible = true
 energy = 1.0
 shadow_enabled = true

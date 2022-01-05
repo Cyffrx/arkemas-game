@@ -1,7 +1,5 @@
 using Godot;
-using System;
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 
 // this might be portable to every actor
@@ -34,16 +32,16 @@ public class ActorStateMachine : _DefaultStateMachine
 	{
 		base._Ready();
 
+		Velocity = Vector2.Zero;
 		animationPlayer = Owner.GetNode<AnimationPlayer>("AnimationPlayer");
 		kb = (KinematicBody2D) Owner;
 		
 		sprite = Owner.GetNode<Sprite>("Sprite");
 
-		List<ActorState> actorStates = this.GetChildren().OfType<ActorState>().ToList();
+		// List<ActorState> actorStates = this.GetChildren().OfType<ActorState>().ToList();
+		// for (int i = 0; i < actorStates.Count; i++) actorStates[i].ASM = this;
 
-		for (int i = 0; i < actorStates.Count; i++) actorStates[i].ASM = this;
-
-		ChangeState(actorStates[0].Name);
+		// ChangeState(actorStates[0].Name);
 	}
 
 	#region temporary
@@ -117,4 +115,17 @@ public class ActorStateMachine : _DefaultStateMachine
 			this.Value = this._defaultValue;
 		}
 	}
+
+	#region convert velocity to directional integer
+	public int Direction
+	{
+		get
+		{
+			if (Velocity.x == -1) return 3;
+			else if (Velocity.x == 1) return 1;
+			else if (Velocity.y == -1) return 2;
+			else return 0;
+		}
+	}
+	#endregion
 }

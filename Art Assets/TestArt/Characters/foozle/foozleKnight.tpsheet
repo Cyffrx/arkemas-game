@@ -1,0 +1,438 @@
+{
+	"textures": [
+		{
+			"image": "foozleKnight.png",
+			"size": {
+				"w": 768,
+				"h": 768
+			},
+			"sprites": [
+				{
+					"filename": "Attack00/WarriorDownAttack01.png",
+					"region": {
+						"x": 0,
+						"y": 0,
+						"w": 288,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Attack00/WarriorLeftAttack01.png",
+					"region": {
+						"x": 384,
+						"y": 0,
+						"w": 288,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Attack00/WarriorRightAttack01.png",
+					"region": {
+						"x": 0,
+						"y": 48,
+						"w": 288,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Attack00/WarriorUpAttack01.png",
+					"region": {
+						"x": 384,
+						"y": 48,
+						"w": 288,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Attack01/WarriorDownAttack02.png",
+					"region": {
+						"x": 0,
+						"y": 96,
+						"w": 288,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Attack01/WarriorLeftAttack02.png",
+					"region": {
+						"x": 384,
+						"y": 96,
+						"w": 288,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Attack01/WarriorRightAttack02.png",
+					"region": {
+						"x": 0,
+						"y": 144,
+						"w": 288,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Attack01/WarriorUpAttack02.png",
+					"region": {
+						"x": 384,
+						"y": 144,
+						"w": 288,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Attack02/WarriorDownAttack03.png",
+					"region": {
+						"x": 0,
+						"y": 192,
+						"w": 240,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Attack02/WarriorLeftAttack03.png",
+					"region": {
+						"x": 384,
+						"y": 192,
+						"w": 240,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Attack02/WarriorRightAttack03.png",
+					"region": {
+						"x": 0,
+						"y": 240,
+						"w": 240,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Attack02/WarriorUpAttack03.png",
+					"region": {
+						"x": 384,
+						"y": 240,
+						"w": 240,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Death/WarriorDownDeath.png",
+					"region": {
+						"x": 0,
+						"y": 288,
+						"w": 240,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Death/WarriorLeftDeath.png",
+					"region": {
+						"x": 384,
+						"y": 288,
+						"w": 240,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Death/WarriorRightDeath.png",
+					"region": {
+						"x": 0,
+						"y": 336,
+						"w": 240,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Death/WarriorUpDeath.png",
+					"region": {
+						"x": 384,
+						"y": 336,
+						"w": 288,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Hurt/WarriorDownHurt.png",
+					"region": {
+						"x": 0,
+						"y": 384,
+						"w": 192,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Hurt/WarriorLeftHurt.png",
+					"region": {
+						"x": 384,
+						"y": 384,
+						"w": 192,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Hurt/WarriorRightHurt.png",
+					"region": {
+						"x": 0,
+						"y": 432,
+						"w": 192,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Hurt/WarriorUpHurt.png",
+					"region": {
+						"x": 384,
+						"y": 432,
+						"w": 192,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Idle/WarriorDownIdle.png",
+					"region": {
+						"x": 0,
+						"y": 480,
+						"w": 240,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Idle/WarriorLeftIdle.png",
+					"region": {
+						"x": 384,
+						"y": 480,
+						"w": 240,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Idle/WarriorRightIdle.png",
+					"region": {
+						"x": 0,
+						"y": 528,
+						"w": 240,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Idle/WarriorUpIdle.png",
+					"region": {
+						"x": 384,
+						"y": 528,
+						"w": 240,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Walk/WarriorDownWalk.png",
+					"region": {
+						"x": 0,
+						"y": 576,
+						"w": 384,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Walk/WarriorLeftWalk.png",
+					"region": {
+						"x": 384,
+						"y": 576,
+						"w": 384,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Walk/WarriorRightWalk.png",
+					"region": {
+						"x": 0,
+						"y": 624,
+						"w": 384,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Walk/WarriorUpWalk.png",
+					"region": {
+						"x": 384,
+						"y": 624,
+						"w": 384,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:6e325e03057da7a4758c7f086e2fb6a4:ab4dadd3141361180ffd540e1f18d9f4:da64782f96eb3dcbe148957b5aaf9a15$"
+	}
+}

@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\souls\\Documents\\GitHub\\arkemas-game\\arkemas-game.csproj",
-      "projectName": "arkemas-game",
-      "projectPath": "C:\\Users\\souls\\Documents\\GitHub\\arkemas-game\\arkemas-game.csproj",
+      "projectUniqueName": "C:\\Users\\souls\\Documents\\GitHub\\arkemas-game\\arkemas.csproj",
+      "projectName": "arkemas",
+      "projectPath": "C:\\Users\\souls\\Documents\\GitHub\\arkemas-game\\arkemas.csproj",
       "packagesPath": "C:\\Users\\souls\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\souls\\Documents\\GitHub\\arkemas-game\\.mono\\temp\\obj\\",
       "projectStyle": "PackageReference",

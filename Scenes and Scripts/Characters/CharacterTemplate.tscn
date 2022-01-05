@@ -2,9 +2,7 @@
 
 [node name="Actor" type="KinematicBody2D"]
 
-[node name="Stats" type="Node" parent="."]
-
-[node name="Spells" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="."]
 
 [node name="Sprite" type="Sprite" parent="."]
 
