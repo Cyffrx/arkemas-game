@@ -24,10 +24,26 @@ public class Attacking : PlayerState
 		if (PSM.Stamina.Value > 0)
 		{
 			PSM.Stamina.Value -= StaminaCost;
+			PSM.StaminaDelayTimer.Start();
 			
 			// this has a custom direction decider since mouse is a thing... later
+			float attackVelocity = PSM.kb.GetLocalMousePosition().Normalized().Angle();
+			int attackDirection = 0;
 
-			PSM.animationPlayer.Play("attack-chain_"+ _attackChainState.Value++ +"_"+PSM.Direction);
+			if (attackVelocity > 0)
+			{
+				if (attackVelocity < 1.0f) attackDirection = 1;
+				else if (attackVelocity < 2.0f) attackDirection = 0;
+				else attackDirection = 3;
+			}
+			else 
+			{
+				if (attackVelocity > -1.0f) attackDirection = 1;
+				else if (attackVelocity > -2.0f) attackDirection = 2;
+				else attackDirection = 3;
+			}
+			
+			PSM.animationPlayer.Play("attack-chain_"+ _attackChainState.Value++ +"_"+attackDirection);
 		}
 		else PSM.ChangeState("Idling");
 	}
@@ -58,7 +74,10 @@ public class Attacking : PlayerState
 	}
 
 	public void _on_DamageArea_area_entered(Area2D area)
-	{ if (area.IsInGroup("hurtbox")) area.Owner.GetNode("StateMachine").Call("Damage", AttackDamage); }
+	{
+		if (area.IsInGroup("hurtbox") && Owner != area.Owner) 
+			area.Owner.GetNode("StateMachine").Call("Hurt", AttackDamage);
+	}
 
 	public void _on_AnimationPlayer_animation_finished(string animName)
 	{

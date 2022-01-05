@@ -15,13 +15,14 @@ script = ExtResource( 4 )
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 619, 442 )
 
-[node name="Light2D" parent="Player" index="5"]
-visible = true
+[node name="Light2D" parent="Player" index="4"]
 energy = 1.0
 shadow_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2( -118, -38 )
 current = true
+
+[connection signal="area_entered" from="Player/Sprite/DamageArea" to="Player/StateMachine/Attacking" method="_on_DamageArea_area_entered"]
 
 [editable path="Player"]

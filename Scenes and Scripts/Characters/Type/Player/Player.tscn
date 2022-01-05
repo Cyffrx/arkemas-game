@@ -6,8 +6,8 @@
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Player/PlayerStateMachine/Dodging.cs" type="Script" id=4]
 [ext_resource path="res://Art Assets/TestArt/Characters/foozleKnight.png" type="Texture" id=5]
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Player/PlayerStateMachine/Attacking.cs" type="Script" id=6]
+[ext_resource path="res://Scenes and Scripts/Characters/Type/Player/PlayerStateMachine/Staggered.cs" type="Script" id=7]
 [ext_resource path="res://Art Assets/TestArt/Lights/light.png" type="Texture" id=9]
-[ext_resource path="res://Scenes and Scripts/Characters/Type/Player/PlayerStateReader.cs" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 15.5, 17 )
@@ -907,7 +907,43 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=18]
 resource_name = "stagger"
-length = 0.4
+length = 0.55
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 128, 129, 130, 131, 129, 128 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/Hitbox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/Hitbox:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 12.1655
@@ -916,20 +952,7 @@ radius = 12.1655
 position = Vector2( 12, -6 )
 scale = Vector2( 0.5, 0.5 )
 
-[node name="Label" type="Label" parent="." index="0"]
-margin_left = -82.0
-margin_top = -102.0
-margin_right = -42.0
-margin_bottom = -88.0
-rect_scale = Vector2( 2.90721, 2.90721 )
-text = "State"
-align = 1
-script = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Timers" type="Node" parent="." index="1"]
+[node name="Timers" type="Node" parent="." index="0"]
 
 [node name="AecariumDecay" type="Timer" parent="Timers" index="0"]
 autostart = true
@@ -941,7 +964,11 @@ autostart = true
 [node name="StaminaRegen" type="Timer" parent="Timers" index="2"]
 autostart = true
 
-[node name="StateMachine" parent="." index="2"]
+[node name="StaminaDelay" type="Timer" parent="Timers" index="3"]
+wait_time = 0.5
+one_shot = true
+
+[node name="StateMachine" parent="." index="1"]
 script = ExtResource( 3 )
 
 [node name="Idling" type="Node" parent="StateMachine" index="0"]
@@ -953,16 +980,12 @@ script = ExtResource( 6 )
 [node name="Dodging" type="Node" parent="StateMachine" index="2"]
 script = ExtResource( 4 )
 
-[node name="Casting" type="Node" parent="StateMachine" index="3"]
+[node name="Staggered" type="Node" parent="StateMachine" index="3"]
+script = ExtResource( 7 )
 
-[node name="Staggered" type="Node" parent="StateMachine" index="4"]
+[node name="Dead" type="Node" parent="StateMachine" index="4"]
 
-[node name="Timer" type="Timer" parent="StateMachine/Staggered" index="0"]
-wait_time = 0.5
-
-[node name="Dead" type="Node" parent="StateMachine" index="5"]
-
-[node name="Sprite" parent="." index="3"]
+[node name="Sprite" parent="." index="2"]
 position = Vector2( -24, 12 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 5 )
@@ -980,7 +1003,7 @@ monitoring = false
 [node name="CollisionShape2D" parent="Sprite/InteractionZone" index="0"]
 shape = SubResource( 26 )
 
-[node name="Hitbox" parent="Sprite" index="2" groups=["player"]]
+[node name="Hitbox" parent="Sprite" index="2"]
 visible = false
 position = Vector2( 0, 0.5 )
 monitoring = false
@@ -988,7 +1011,7 @@ monitoring = false
 [node name="CollisionShape2D" parent="Sprite/Hitbox" index="0"]
 shape = SubResource( 27 )
 
-[node name="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" parent="." index="3"]
 anims/RESET = SubResource( 19 )
 anims/attack-chain_0_0 = SubResource( 37 )
 anims/attack-chain_0_1 = SubResource( 38 )
@@ -1013,18 +1036,19 @@ anims/run_2 = SubResource( 33 )
 anims/run_3 = SubResource( 34 )
 anims/stagger = SubResource( 18 )
 
-[node name="Light2D" type="Light2D" parent="." index="5"]
-visible = false
+[node name="Light2D" type="Light2D" parent="." index="4"]
 scale = Vector2( 2, 2 )
 texture = ExtResource( 9 )
 energy = 0.5
 
-[node name="CollisionShape2D" parent="." index="6"]
+[node name="CollisionShape2D" parent="." index="5"]
 position = Vector2( -24, 12 )
 shape = SubResource( 4 )
 
 [connection signal="timeout" from="Timers/AecariumDecay" to="StateMachine" method="_on_AecariumDecay_timeout"]
 [connection signal="timeout" from="Timers/HealthRegen" to="StateMachine" method="_on_HealthRegen_timeout"]
 [connection signal="timeout" from="Timers/StaminaRegen" to="StateMachine" method="_on_StaminaRegen_timeout"]
+[connection signal="area_entered" from="Sprite/DamageArea" to="StateMachine/Attacking" method="_on_DamageArea_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Attacking" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Dodging" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Staggered" method="_on_AnimationPlayer_animation_finished"]

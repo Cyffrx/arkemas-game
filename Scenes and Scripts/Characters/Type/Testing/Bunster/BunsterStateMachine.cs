@@ -10,7 +10,7 @@ public class BunsterStateMachine : ActorStateMachine
 	{
 		base._Ready();
 
-		Health = new Attribute("Health", 10, 0, 8);
+		Health = new Attribute("Health", 1, 0, 1);
 		Stamina = new Attribute("Stamina", 10, 0, 8);
 		Target = Owner.GetNode<RayCast2D>("Target");
 
@@ -27,10 +27,7 @@ public class BunsterStateMachine : ActorStateMachine
 	{
 		base._Process(delta);
 
-		Target.CastTo = kb.ToLocal(GetNode<KinematicBody2D>("../../../../Player").Position);
-		if (Target.CastTo.Length() < 1000.0f) ChangeState("BunsterChase");
-		else ChangeState("BunsterWander");
-
-		// handle radar?
+		try {Target.CastTo = kb.ToLocal(GetNode<KinematicBody2D>("../../../../Player").Position);}
+		catch {ChangeState("BunsterWander");}
 	}
 }

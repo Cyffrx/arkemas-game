@@ -14,7 +14,7 @@
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/InteractionZone"]
 
-[node name="Hitbox" type="Area2D" parent="Sprite"]
+[node name="Hitbox" type="Area2D" parent="Sprite" groups=["hurtbox"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Hitbox"]
 

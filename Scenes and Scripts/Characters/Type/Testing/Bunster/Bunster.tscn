@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes and Scripts/Characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art Assets/TestArt/Characters/Bunster/Bunster.png" type="Texture" id=2]
@@ -13,6 +13,50 @@ radius = 67.0
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 44.0
 height = 70.0
+
+[sub_resource type="Animation" id=10]
+resource_name = "attack_0"
+
+[sub_resource type="Animation" id=11]
+resource_name = "attack_1"
+
+[sub_resource type="Animation" id=12]
+resource_name = "attack_2"
+
+[sub_resource type="Animation" id=13]
+resource_name = "attack_3"
+
+[sub_resource type="Animation" id=6]
+resource_name = "idle_0"
+loop = true
+
+[sub_resource type="Animation" id=7]
+resource_name = "idle_1"
+loop = true
+
+[sub_resource type="Animation" id=8]
+resource_name = "idle_2"
+loop = true
+
+[sub_resource type="Animation" id=9]
+resource_name = "idle_3"
+loop = true
+
+[sub_resource type="Animation" id=14]
+resource_name = "run_0"
+loop = true
+
+[sub_resource type="Animation" id=15]
+resource_name = "run_1"
+loop = true
+
+[sub_resource type="Animation" id=16]
+resource_name = "run_2"
+loop = true
+
+[sub_resource type="Animation" id=17]
+resource_name = "run_3"
+loop = true
 
 [sub_resource type="CapsuleShape2D" id=5]
 radius = 44.0
@@ -42,18 +86,31 @@ texture = ExtResource( 2 )
 
 [node name="DamageArea" parent="Sprite" index="0"]
 position = Vector2( 72, 4 )
-monitoring = false
 
 [node name="CollisionShape2D" parent="Sprite/DamageArea" index="0"]
 shape = SubResource( 1 )
 
-[node name="Hitbox" parent="Sprite" index="2" groups=["hurtbox"]]
+[node name="Hitbox" parent="Sprite" index="2"]
 collision_layer = 2
 
 [node name="CollisionShape2D" parent="Sprite/Hitbox" index="0"]
 position = Vector2( 0, 17 )
 rotation = 1.5708
 shape = SubResource( 4 )
+
+[node name="AnimationPlayer" parent="." index="2"]
+anims/attack_0 = SubResource( 10 )
+anims/attack_1 = SubResource( 11 )
+anims/attack_2 = SubResource( 12 )
+anims/attack_3 = SubResource( 13 )
+anims/idle_0 = SubResource( 6 )
+anims/idle_1 = SubResource( 7 )
+anims/idle_2 = SubResource( 8 )
+anims/idle_3 = SubResource( 9 )
+anims/run_0 = SubResource( 14 )
+anims/run_1 = SubResource( 15 )
+anims/run_2 = SubResource( 16 )
+anims/run_3 = SubResource( 17 )
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2( 0, 17 )
@@ -65,3 +122,5 @@ enabled = true
 cast_to = Vector2( 0, 250 )
 
 [connection signal="timeout" from="StateMachine/BunsterWander/BoredTimer" to="StateMachine/BunsterWander" method="_on_BoredTimer_timeout"]
+[connection signal="area_entered" from="Sprite/DamageArea" to="StateMachine/BunsterAttacking" method="_on_DamageArea_area_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/BunsterAttacking" method="_on_AnimationPlayer_animation_finished"]

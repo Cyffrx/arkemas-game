@@ -19,6 +19,7 @@ public class Dodging : PlayerState
 		if (PSM.Stamina.Value > 0)
 		{
 			PSM.Stamina.Value -= StaminaCost;
+			PSM.StaminaDelayTimer.Start();
 
 			if (PSM.Velocity == Vector2.Zero) PSM.Velocity = PSM.kb.GetLocalMousePosition().Normalized();
 			PSM.animationPlayer.Play("dodge_"+PSM.Direction);

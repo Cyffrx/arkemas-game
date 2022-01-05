@@ -61,8 +61,6 @@ public class ActorStateMachine : _DefaultStateMachine
 	public virtual void Hurt(int value) 
 	{ 
 		Health.Value -= value;
-		// animationPlayer.Play("stagger_"+Direction);
-		// ChangeState("Staggered");
 	}
 
 	public virtual void Heal(int value)
@@ -73,6 +71,7 @@ public class ActorStateMachine : _DefaultStateMachine
 	public virtual void Die()
 	{
 		EmitSignal(nameof(Died));
+		GD.Print(Owner.Name + " died");
 		Owner.QueueFree();
 	}
 	#endregion
@@ -82,9 +81,9 @@ public class ActorStateMachine : _DefaultStateMachine
 	{
 		get
 		{
-			if (Velocity.x == -1) return 3;
-			else if (Velocity.x == 1) return 1;
-			else if (Velocity.y == -1) return 2;
+			if (Velocity.x < 0) return 3;
+			else if (Velocity.x > 0) return 1;
+			else if (Velocity.y < 0) return 2;
 			else return 0;
 		}
 	}
