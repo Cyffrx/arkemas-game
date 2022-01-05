@@ -5,26 +5,23 @@ using System.Collections.Generic;
 public class Attacking : PlayerState
 {
 	private bool _comboAttack;
-	[Export] private int StaminaCost;
-	[Export] private int AttackDamage;
-	private ActorStateMachine.Stat _attackChainState;
+	[Export] private int StaminaCost = 1;
+	[Export] private int AttackDamage = 1;
+	private Attribute _attackChainState;
 
 	public override void _Ready()
 	{
 		base._Ready();
 
 		_comboAttack = false;
-		StaminaCost = 1;
-		AttackDamage = 2;
-		_attackChainState = new ActorStateMachine.Stat("AttackChain", 2, 0, 0);
+		_attackChainState = new Attribute("AttackChain", 2, 0, 0);
 	}
 
 	public override void OnStart(Dictionary<string, object> message)
 	{
 		base.OnStart(message);
 
-		//if (PSM.Stamina.Value > 0)
-		if (true)
+		if (PSM.Stamina.Value > 0)
 		{
 			PSM.Stamina.Value -= StaminaCost;
 			
@@ -62,7 +59,6 @@ public class Attacking : PlayerState
 
 	public void _on_DamageArea_area_entered(Area2D area)
 	{ if (area.IsInGroup("hurtbox")) area.Owner.GetNode("StateMachine").Call("Damage", AttackDamage); }
-
 
 	public void _on_AnimationPlayer_animation_finished(string animName)
 	{

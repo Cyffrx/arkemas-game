@@ -2,25 +2,25 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sprite.png-337372e06bcfa2f591d11f309ee9cd98.stex"
+path="res://.import/wall0.png-57df4dace78ebd9fe8de66ca45909359.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art Assets/TestArt/Level/sprite.png"
-dest_files=[ "res://.import/sprite.png-337372e06bcfa2f591d11f309ee9cd98.stex" ]
+source_file="res://Art Assets/TestArt/Level/wall0.png"
+dest_files=[ "res://.import/wall0.png-57df4dace78ebd9fe8de66ca45909359.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

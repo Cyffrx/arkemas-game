@@ -7,3 +7,11 @@ C:\Users\souls\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas.Assemb
 C:\Users\souls\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas.csproj.CoreCompileInputs.cache
 C:\Users\souls\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas.dll
 C:\Users\souls\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas.pdb
+C:\Users\Cash Muehl\Documents\GitHub\arkemas-game\.mono\temp\bin\Debug\arkemas.dll
+C:\Users\Cash Muehl\Documents\GitHub\arkemas-game\.mono\temp\bin\Debug\arkemas.pdb
+C:\Users\Cash Muehl\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas.csproj.AssemblyReference.cache
+C:\Users\Cash Muehl\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas.AssemblyInfoInputs.cache
+C:\Users\Cash Muehl\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas.AssemblyInfo.cs
+C:\Users\Cash Muehl\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas.csproj.CoreCompileInputs.cache
+C:\Users\Cash Muehl\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas.dll
+C:\Users\Cash Muehl\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas.pdb

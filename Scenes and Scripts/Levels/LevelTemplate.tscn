@@ -2,7 +2,9 @@
 
 [node name="LevelTemplate" type="Node2D"]
 
-[node name="TileMaps" type="Node" parent="."]
+[node name="PlayerSpawn" type="Position2D" parent="."]
+
+[node name="TileMaps" type="Node2D" parent="."]
 
 [node name="Navigation2D" type="Navigation2D" parent="TileMaps"]
 

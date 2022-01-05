@@ -6,20 +6,19 @@ using System.Collections.Generic;
 public class ActorStateMachine : _DefaultStateMachine
 {
 	#region stats
-	public Stat Health;
-	public Stat Aecarium;
-	public Stat Stamina;
+	public Attribute Health;
+	public Attribute Aecarium;
+	public Attribute Stamina;
 
 		#region movement stats
-		[Export] public float WalkSpeed;
-		[Export] public float RunSpeed;
-		[Export] public float Acceleration;
-		[Export] public float DodgeSpeed;
+		public float WalkSpeed;
+		public float RunSpeed;
+		public float Acceleration;
+		public float DodgeSpeed;
 		#endregion
 	#endregion
 
 	#region events
-	[Signal] public delegate void HealthChanged();
 	[Signal] public delegate void Died();
 	#endregion
 
@@ -44,6 +43,11 @@ public class ActorStateMachine : _DefaultStateMachine
 		// ChangeState(actorStates[0].Name);
 	}
 
+	public override void _Process(float delta)
+	{
+		if (Health.Value <= 0) Die();
+	}
+
 	#region temporary
 	public void CheckFlipSprite(Vector2 facing)
 	{
@@ -56,65 +60,22 @@ public class ActorStateMachine : _DefaultStateMachine
 	#region health / life state
 	public virtual void Hurt(int value) 
 	{ 
-		EmitSignal(nameof(HealthChanged));
 		Health.Value -= value;
-		CheckHealthStatus();
+		// animationPlayer.Play("stagger_"+Direction);
+		// ChangeState("Staggered");
 	}
 
 	public virtual void Heal(int value)
 	{
-		EmitSignal(nameof(HealthChanged));
-		Health.Value -= value;
-		CheckHealthStatus();
+		Health.Value += value;
 	}
-
-	public virtual void CheckHealthStatus()
-	{ if (Health.Value <= 0) Die(); }
 
 	public virtual void Die()
 	{
 		EmitSignal(nameof(Died));
 		Owner.QueueFree();
 	}
-
 	#endregion
-	public class Stat
-	{
-		public readonly string Name;
-		
-		// max value
-		private int _defaultMax;
-		private int _max;
-		// value
-		private int _defaultValue;
-		private int _value;
-		// min value
-		private int _defaultMin;
-		private int _min;
-
-		public int Max {get { return _max; } set {_max = value;}}
-		public int Value {get {return _value;} set {_value = _checkLimits(value);}}
-		public int Min {get { return _min; } set {_min = value;}}
-
-		private int _checkLimits (int value) { return (value <= _max && value >= _min) ? value : _value; }
-
-		public Stat(string name, int maxValue, int minValue, int value)
-		{
-			this.Name = name;
-			this._defaultMax = maxValue;
-			this._defaultMin = minValue;
-			this._defaultValue = value;
-
-			Reset();
-		}
-
-		public void Reset()
-		{
-			this.Max = this._defaultMax;
-			this.Min = this._defaultMin;
-			this.Value = this._defaultValue;
-		}
-	}
 
 	#region convert velocity to directional integer
 	public int Direction
