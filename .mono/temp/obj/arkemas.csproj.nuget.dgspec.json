@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Cash Muehl\\Documents\\GitHub\\arkemas-game\\arkemas.csproj": {}
+    "C:\\Users\\souls\\Documents\\GitHub\\arkemas-game\\arkemas.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Cash Muehl\\Documents\\GitHub\\arkemas-game\\arkemas.csproj": {
+    "C:\\Users\\souls\\Documents\\GitHub\\arkemas-game\\arkemas.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Cash Muehl\\Documents\\GitHub\\arkemas-game\\arkemas.csproj",
+        "projectUniqueName": "C:\\Users\\souls\\Documents\\GitHub\\arkemas-game\\arkemas.csproj",
         "projectName": "arkemas",
-        "projectPath": "C:\\Users\\Cash Muehl\\Documents\\GitHub\\arkemas-game\\arkemas.csproj",
-        "packagesPath": "C:\\Users\\Cash Muehl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Cash Muehl\\Documents\\GitHub\\arkemas-game\\.mono\\temp\\obj\\",
+        "projectPath": "C:\\Users\\souls\\Documents\\GitHub\\arkemas-game\\arkemas.csproj",
+        "packagesPath": "C:\\Users\\souls\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\souls\\Documents\\GitHub\\arkemas-game\\.mono\\temp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Cash Muehl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\souls\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -43,7 +43,7 @@
       "frameworks": {
         "net472": {
           "targetAlias": "net472",
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -23,6 +23,4 @@ shadow_enabled = true
 position = Vector2( -118, -38 )
 current = true
 
-[connection signal="area_entered" from="Player/Sprite/DamageArea" to="Player/StateMachine/Attacking" method="_on_DamageArea_area_entered"]
-
 [editable path="Player"]
