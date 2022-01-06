@@ -9,13 +9,11 @@
 [node name="Navigation2D" type="Navigation2D" parent="TileMaps"]
 
 [node name="Floors" type="TileMap" parent="TileMaps/Navigation2D"]
-mode = 1
-cell_size = Vector2( 64, 32 )
+cell_size = Vector2( 32, 32 )
 format = 1
 
 [node name="Walls" type="TileMap" parent="TileMaps"]
-mode = 1
-cell_size = Vector2( 64, 32 )
+cell_size = Vector2( 32, 32 )
 format = 1
 
 [node name="Enemies" type="Node" parent="."]
