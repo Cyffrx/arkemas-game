@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class BunsterStateMachine : ActorStateMachine
 {
 	public RayCast2D Target;
+	
+	public AudioStream lungeSound;
 
 	public override void _Ready()
 	{
@@ -16,7 +18,9 @@ public class BunsterStateMachine : ActorStateMachine
 
 		RunSpeed = 100;
 		WalkSpeed = 50;
-		
+
+		lungeSound = ResourceLoader.Load("res://Sounds/bunsterScream/bunsterScream.wav") as AudioStream;
+
 		List<BunsterState> bunsterStates = this.GetChildren().OfType<BunsterState>().ToList();
 		for (int i = 0; i < bunsterStates.Count; i++) bunsterStates[i].BSM = this;
 

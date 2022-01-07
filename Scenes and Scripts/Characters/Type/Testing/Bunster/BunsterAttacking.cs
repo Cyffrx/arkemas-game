@@ -10,7 +10,7 @@ public class BunsterAttacking : BunsterState
 		base.OnStart(message);
 
 		BSM.animationPlayer.Play("attack_" + BSM.Direction);
-		if (!BSM.soundPlayer.Playing) BSM.soundPlayer.Play();
+		if (!BSM.soundPlayer.Playing) {BSM.soundPlayer.Stream = BSM.lungeSound; BSM.soundPlayer.Play();}
 	}
 	public override void UpdateState(float _delta)
 	{

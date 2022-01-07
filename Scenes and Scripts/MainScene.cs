@@ -17,5 +17,6 @@ public class MainScene : Node
     {
         player.GlobalPosition = map.GetNode<Position2D>("PlayerSpawn").GlobalPosition;
         player.GetNode<Node>("StateMachine").Call("_Ready");
+		map._Ready();
     }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Scenes and Scripts/Characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Player/PlayerStateMachine/Idling.cs" type="Script" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://Art Assets/TestArt/Characters/foozleKnight.png" type="Texture" id=5]
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Player/PlayerStateMachine/Attacking.cs" type="Script" id=6]
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Player/PlayerStateMachine/Staggered.cs" type="Script" id=7]
-[ext_resource path="res://Sounds/player/Gravel - Run.wav" type="AudioStream" id=8]
 [ext_resource path="res://Art Assets/TestArt/Lights/light.png" type="Texture" id=9]
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Player/PlayerStateMachine/Dead.cs" type="Script" id=10]
 
@@ -954,7 +953,7 @@ radius = 12.1655
 position = Vector2( 12, -6 )
 scale = Vector2( 0.5, 0.5 )
 
-[node name="Timers" type="Node" parent="." index="0"]
+[node name="Timers" type="Node" parent="." index="1"]
 
 [node name="AecariumDecay" type="Timer" parent="Timers" index="0"]
 wait_time = 0.1
@@ -971,7 +970,7 @@ autostart = true
 wait_time = 0.5
 one_shot = true
 
-[node name="StateMachine" parent="." index="1"]
+[node name="StateMachine" parent="." index="2"]
 script = ExtResource( 3 )
 
 [node name="Idling" type="Node" parent="StateMachine" index="0"]
@@ -989,7 +988,7 @@ script = ExtResource( 7 )
 [node name="Dead" type="Node" parent="StateMachine" index="4"]
 script = ExtResource( 10 )
 
-[node name="Sprite" parent="." index="2"]
+[node name="Sprite" parent="." index="3"]
 position = Vector2( -24, 12 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 5 )
@@ -1015,7 +1014,7 @@ monitoring = false
 [node name="CollisionShape2D" parent="Sprite/Hitbox" index="0"]
 shape = SubResource( 27 )
 
-[node name="AnimationPlayer" parent="." index="3"]
+[node name="AnimationPlayer" parent="." index="4"]
 anims/RESET = SubResource( 19 )
 anims/attack-chain_0_0 = SubResource( 37 )
 anims/attack-chain_0_1 = SubResource( 38 )
@@ -1040,19 +1039,16 @@ anims/run_2 = SubResource( 33 )
 anims/run_3 = SubResource( 34 )
 anims/stagger = SubResource( 18 )
 
-[node name="Light2D" type="Light2D" parent="." index="4"]
+[node name="Light2D" type="Light2D" parent="." index="5"]
 scale = Vector2( 2, 2 )
 texture = ExtResource( 9 )
+color = Color( 0.776471, 0.713726, 0.847059, 1 )
 energy = 0.5
 shadow_enabled = true
 
-[node name="CollisionShape2D" parent="." index="5"]
+[node name="CollisionShape2D" parent="." index="6"]
 position = Vector2( -24, 12 )
 shape = SubResource( 4 )
-
-[node name="AudioStreamPlayer2D" parent="." index="6"]
-position = Vector2( -24, 12 )
-stream = ExtResource( 8 )
 
 [connection signal="timeout" from="Timers/AecariumDecay" to="StateMachine" method="_on_AecariumDecay_timeout"]
 [connection signal="timeout" from="Timers/HealthRegen" to="StateMachine" method="_on_HealthRegen_timeout"]

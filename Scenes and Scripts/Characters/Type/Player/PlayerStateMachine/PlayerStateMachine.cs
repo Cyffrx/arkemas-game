@@ -10,8 +10,13 @@ public class PlayerStateMachine : ActorStateMachine
 	Timer staminaRegenTimer;
 	public Timer StaminaDelayTimer;
 
+	Camera2D camera;
+
 	private Light2D aecarialLight;
 
+	public AudioStream footstepSound;
+	public AudioStream attackSound;
+	
     public override void _Ready()
     {
         base._Ready();
@@ -24,11 +29,18 @@ public class PlayerStateMachine : ActorStateMachine
         WalkSpeed = 25;
         DodgeSpeed = 150;
 
+		#region timers
 		aecariumDecayTimer = Owner.GetNode<Timer>("Timers/AecariumDecay");
 		healthRegenTimer = Owner.GetNode<Timer>("Timers/HealthRegen");
 		staminaRegenTimer = Owner.GetNode<Timer>("Timers/StaminaRegen");
 		StaminaDelayTimer = Owner.GetNode<Timer>("Timers/StaminaDelay");
+		#endregion
+		
 		aecarialLight = Owner.GetNode<Light2D>("Light2D");
+		camera = Owner.GetNode<Camera2D>("Camera2D");
+
+		footstepSound = ResourceLoader.Load("res://Sounds/player/Gravel - Run.wav") as AudioStream;
+		attackSound = ResourceLoader.Load("res://Sounds/player/AFX_SWORDSHING_4_DFMG.wav") as AudioStream;
 
         List<PlayerState> playerStates = this.GetChildren().OfType<PlayerState>().ToList();
 		for (int i = 0; i < playerStates.Count; i++) playerStates[i].PSM = this;
@@ -40,8 +52,19 @@ public class PlayerStateMachine : ActorStateMachine
 	{
 		base._Process(delta);
 
+		if (Aecarium.Value <= 0) Die();
+
+		#region aecarial light
 		float calculatedEnergy = Mathf.Log( 2.25f * Aecarium.Percentage + 1f);
 		aecarialLight.Energy = calculatedEnergy > .75f ? .75f : calculatedEnergy;
+		#endregion
+
+		#region camera
+		float zoomLevel = calculatedEnergy > .35f ? .35f : calculatedEnergy;
+		zoomLevel = zoomLevel == 0 ? .15f: zoomLevel; 
+
+		camera.Zoom = new Vector2(zoomLevel, zoomLevel);
+		#endregion
 	}
 
 	public void _on_AecariumDecay_timeout()

@@ -25,6 +25,9 @@ public class Attacking : PlayerState
 		{
 			PSM.Stamina.Value -= StaminaCost;
 			PSM.StaminaDelayTimer.Start();
+
+			PSM.soundPlayer.Stream = PSM.attackSound;
+			PSM.soundPlayer.Play();
 			
 			// this has a custom direction decider since mouse is a thing... later
 			float attackVelocity = PSM.kb.GetLocalMousePosition().Normalized().Angle();

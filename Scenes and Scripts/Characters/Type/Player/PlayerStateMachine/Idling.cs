@@ -17,7 +17,6 @@ public class Idling : PlayerState
 		else
 		{
 			PSM.animationPlayer.Play("run_"+PSM.Direction);
-			
 			PSM.kb.MoveAndSlide(PSM.Velocity.Normalized() * PSM.RunSpeed);
 		}
 		#endregion
@@ -28,6 +27,10 @@ public class Idling : PlayerState
 		if (Input.IsActionJustPressed("action_dodge")) PSM.ChangeState("Dodging");
 		#endregion
 
-		if (PSM.Velocity != Vector2.Zero && !PSM.soundPlayer.Playing ) PSM.soundPlayer.Play();
+		if (PSM.Velocity != Vector2.Zero && !PSM.soundPlayer.Playing)
+		{
+			PSM.soundPlayer.Stream = PSM.footstepSound;
+			PSM.soundPlayer.Play();
+		}
 	}
 }

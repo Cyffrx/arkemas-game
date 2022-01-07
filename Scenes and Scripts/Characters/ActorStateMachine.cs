@@ -22,8 +22,8 @@ public class ActorStateMachine : _DefaultStateMachine
 	[Signal] public delegate void Died();
 	#endregion
 
-	public AnimationPlayer animationPlayer;	// need to make my own animation player to handle directional assignment
-	public AudioStreamPlayer2D soundPlayer;	// need to make my own animation player to handle directional assignment
+	public AnimationPlayer animationPlayer;
+	public AudioStreamPlayer2D soundPlayer;
 	public KinematicBody2D kb;
 	public Vector2 Velocity;
 	public Sprite sprite; // temporary
@@ -33,8 +33,8 @@ public class ActorStateMachine : _DefaultStateMachine
 		base._Ready();
 
 		Velocity = Vector2.Zero;
-		animationPlayer = Owner.GetNode<AnimationPlayer>("AnimationPlayer");
 		soundPlayer = Owner.GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
+		animationPlayer = Owner.GetNode<AnimationPlayer>("AnimationPlayer");
 		kb = (KinematicBody2D) Owner;
 		
 		sprite = Owner.GetNode<Sprite>("Sprite");
