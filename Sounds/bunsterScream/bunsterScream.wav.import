@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bunsterScream.wav-8bd5947de8f5b0d67ca14afd3aebc6eb.sample"
+
+[deps]
+
+source_file="res://Sounds/bunsterScream/bunsterScream.wav"
+dest_files=[ "res://.import/bunsterScream.wav-8bd5947de8f5b0d67ca14afd3aebc6eb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

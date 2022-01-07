@@ -24,7 +24,7 @@ public class PauseMenu : _GUIState
         Owner.GetNode<Control>("Pause Menu").Visible = false;
     }
 
-    public void _on_Resume_pressed() { GD.Print("Resume pressed"); GSM.ChangeState("HUD"); }
+    public void _on_Resume_pressed() { GSM.ChangeState("HUD"); }
 
     public void _on_Main_Menu_pressed() { GSM.ChangeState("MainMenu"); }
 

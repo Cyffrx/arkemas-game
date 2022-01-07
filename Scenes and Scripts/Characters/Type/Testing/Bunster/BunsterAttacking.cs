@@ -10,6 +10,7 @@ public class BunsterAttacking : BunsterState
 		base.OnStart(message);
 
 		BSM.animationPlayer.Play("attack_" + BSM.Direction);
+		if (!BSM.soundPlayer.Playing) BSM.soundPlayer.Play();
 	}
 	public override void UpdateState(float _delta)
 	{
@@ -23,10 +24,6 @@ public class BunsterAttacking : BunsterState
 
 	public void _on_DamageArea_area_entered(Area2D area)
 	{
-		if (area.IsInGroup("hurtbox") && Owner != area.Owner)
-		{
-			GD.Print("Hurt " + area.Owner.Name);
-			area.Owner.GetNode("StateMachine").Call("Hurt", AttackDamage);
-		}	
+		if (area.IsInGroup("hurtbox") && Owner != area.Owner) area.Owner.GetNode("StateMachine").Call("Hurt", AttackDamage);
 	}
 }

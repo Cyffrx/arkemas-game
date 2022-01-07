@@ -22,8 +22,6 @@ public class HUD : _GUIState
 		HealthBar = Owner.GetNode<ProgressBar>("HUD/VBoxContainer/HBoxContainer/HealthBar");
 		StaminaBar = Owner.GetNode<ProgressBar>("HUD/VBoxContainer/HBoxContainer/StaminaBar");
 
-		GD.Print(PSM.Name);
-
 		AecariumBar.MaxValue = PSM.Aecarium.Max;
 		AecariumBar.MinValue = PSM.Aecarium.Min;
 

@@ -10,6 +10,12 @@ public class MainScene : Node
     {
         map = GetNode<Node2D>("TheWarren");
 		player = GetNode<KinematicBody2D>("Player");
-		player.GlobalPosition = map.GetNode<Position2D>("PlayerSpawn").GlobalPosition;
+		SpawnPlayer();
+    }
+
+    public void SpawnPlayer()
+    {
+        player.GlobalPosition = map.GetNode<Position2D>("PlayerSpawn").GlobalPosition;
+        player.GetNode<Node>("StateMachine").Call("_Ready");
     }
 }

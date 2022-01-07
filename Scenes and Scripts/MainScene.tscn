@@ -8,19 +8,16 @@
 [node name="MainScene" type="Node"]
 script = ExtResource( 4 )
 
-[node name="TheWarren" parent="." instance=ExtResource( 3 )]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="GUI" parent="." instance=ExtResource( 1 )]
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 619, 442 )
+[node name="TheWarren" parent="." instance=ExtResource( 3 )]
 
-[node name="Light2D" parent="Player" index="4"]
-energy = 1.0
-shadow_enabled = true
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 795, 1308 )
+scale = Vector2( 0.25, 0.25 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2( -118, -38 )
 current = true
-
-[editable path="Player"]
+zoom = Vector2( 0.25, 0.25 )

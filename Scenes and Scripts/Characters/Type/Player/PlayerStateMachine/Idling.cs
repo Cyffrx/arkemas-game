@@ -28,12 +28,6 @@ public class Idling : PlayerState
 		if (Input.IsActionJustPressed("action_dodge")) PSM.ChangeState("Dodging");
 		#endregion
 
-		// #region casting
-		// these state changes should probably carry a reference to what spell they're casting too
-		// if (Input.IsActionJustPressed("cast_markAndRecall")) PSM.ChangeState("Casting");
-		// if (Input.IsActionJustPressed("cast_pulse")) PSM.ChangeState("Casting");
-		// if (Input.IsActionJustPressed("cast_offensive")) PSM.ChangeState("Casting");
-		// if (Input.IsActionJustPressed("cast_defensive")) PSM.ChangeState("Casting");
-		// #endregion
+		if (PSM.Velocity != Vector2.Zero && !PSM.soundPlayer.Playing ) PSM.soundPlayer.Play();
 	}
 }

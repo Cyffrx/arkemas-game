@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class Attacking : PlayerState
 {
-	private bool _comboAttack;
+	private bool _comboAttack = false;
+	private bool _hitStun = false;
 	[Export] private int StaminaCost = 1;
 	[Export] private int AttackDamage = 1;
 	private Attribute _attackChainState;
@@ -13,7 +14,6 @@ public class Attacking : PlayerState
 	{
 		base._Ready();
 
-		_comboAttack = false;
 		_attackChainState = new Attribute("AttackChain", 2, 0, 0);
 	}
 
@@ -75,14 +75,18 @@ public class Attacking : PlayerState
 
 	public void _on_DamageArea_area_entered(Area2D area)
 	{
-		if (area.IsInGroup("hurtbox") && Owner != area.Owner) 
+		if (area.IsInGroup("hurtbox") && Owner != area.Owner && !_hitStun) 
+		{
 			area.Owner.GetNode("StateMachine").Call("Hurt", AttackDamage);
+			_hitStun = true;
+		}
 	}
 
 	public void _on_AnimationPlayer_animation_finished(string animName)
 	{
 		if (animName.Contains("attack"))
 		{
+			_hitStun = false;
 			if (_comboAttack) PSM.ChangeState("Attacking");
 			else 
 			{

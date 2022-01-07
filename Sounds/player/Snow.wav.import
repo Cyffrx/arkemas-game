@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Snow.wav-df2e54ee91a7a62b20eac05d6a977475.sample"
+
+[deps]
+
+source_file="res://Sounds/player/Snow.wav"
+dest_files=[ "res://.import/Snow.wav-df2e54ee91a7a62b20eac05d6a977475.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -2,6 +2,7 @@ using Godot;
 
 public class BunsterWander : BunsterState
 {
+	[Export] private bool ShouldWander = true;
 	private Vector2 _velocity;
 	Timer boredTimer;
 	private RandomNumberGenerator rng = new RandomNumberGenerator();
