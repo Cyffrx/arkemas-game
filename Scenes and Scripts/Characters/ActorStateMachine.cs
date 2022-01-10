@@ -19,6 +19,7 @@ public class ActorStateMachine : _DefaultStateMachine
 	#endregion
 
 	#region events
+	[Signal] public delegate void Dying();
 	[Signal] public delegate void Died();
 	#endregion
 
@@ -72,9 +73,14 @@ public class ActorStateMachine : _DefaultStateMachine
 
 	public virtual void Die()
 	{
-		EmitSignal(nameof(Died));
-		Owner.QueueFree();
+		EmitSignal(nameof(Dying));
 	}
+
+	public virtual void Dead()
+	{
+		EmitSignal(nameof(Died));
+	}
+
 	#endregion
 
 	#region convert velocity to directional integer

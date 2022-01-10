@@ -96,4 +96,10 @@ public class PlayerStateMachine : ActorStateMachine
 	{
 		ChangeState("Dead");
 	}
+
+	public override void Dead()
+	{
+		base.Dead();
+		// restart game
+	}
 }

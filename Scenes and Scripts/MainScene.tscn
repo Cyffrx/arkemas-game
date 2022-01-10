@@ -27,14 +27,17 @@ script = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
 position = Vector2( 645, 413 )
+scale = Vector2( 0.25, 0.25 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
-zoom = Vector2( 2, 2 )
+zoom = Vector2( 0.35, 0.35 )
 
 [connection signal="pressed" from="GUI/Main Menu/VBoxContainer/Continue" to="LevelStateMachine/TitleScreen" method="_on_Continue_pressed"]
+[connection signal="area_entered" from="Player/Sprite/DamageArea" to="Player/StateMachine/Attacking" method="_on_DamageArea_area_entered"]
 
 [editable path="GUI"]
 [editable path="GUI/Main Menu"]
 [editable path="GUI/HUD"]
 [editable path="GUI/Pause Menu"]
+[editable path="Player"]
