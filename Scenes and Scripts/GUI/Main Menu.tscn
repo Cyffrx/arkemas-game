@@ -33,28 +33,38 @@ margin_bottom = 38.0
 text = "Continue"
 
 [node name="New Game" type="Button" parent="VBoxContainer"]
-visible = false
 margin_top = 42.0
 margin_right = 84.0
 margin_bottom = 62.0
+disabled = true
 text = "New Game"
 
 [node name="Load Game" type="Button" parent="VBoxContainer"]
-visible = false
 margin_top = 66.0
 margin_right = 84.0
 margin_bottom = 86.0
+disabled = true
 text = "Load Game"
 
 [node name="Settings" type="Button" parent="VBoxContainer"]
-visible = false
 margin_top = 90.0
 margin_right = 84.0
 margin_bottom = 110.0
+disabled = true
 text = "Settings"
 
-[node name="Exit" type="Button" parent="VBoxContainer"]
-margin_top = 42.0
+[node name="Credits" type="Button" parent="VBoxContainer"]
+margin_top = 114.0
 margin_right = 84.0
-margin_bottom = 62.0
+margin_bottom = 134.0
+disabled = true
+text = "Credits"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Exit" type="Button" parent="VBoxContainer"]
+margin_top = 138.0
+margin_right = 84.0
+margin_bottom = 158.0
 text = "Exit"

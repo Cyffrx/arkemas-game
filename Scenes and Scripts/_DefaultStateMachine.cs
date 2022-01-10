@@ -35,18 +35,20 @@ public class _DefaultStateMachine : Node
 			EmitSignal(nameof(PostExit));
 		}
 		
+		EmitSignal(nameof(PreStart));
 
 		LastState = CurrentState;
-		CurrentState = _state.GetType().ToString();
-
 		state = _state;
-		EmitSignal(nameof(PreStart));
+		CurrentState = _state.GetType().ToString();
+		GD.Print("State " + LastState + " changed to " + CurrentState);
+
 		state.OnStart(message);
 		EmitSignal(nameof(PostStart));
+
 		state.OnUpdate();
 	}
 
-	public void ChangeState(string stateName, Dictionary<string, object> message = null)
+	public virtual void ChangeState(string stateName, Dictionary<string, object> message = null)
 	{
 		for (int idx = 0; idx < States.Count; idx++)
 			if (stateName == States[idx].GetType().ToString())

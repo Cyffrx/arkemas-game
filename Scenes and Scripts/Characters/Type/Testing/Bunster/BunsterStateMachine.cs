@@ -34,10 +34,4 @@ public class BunsterStateMachine : ActorStateMachine
 		try {Target.CastTo = kb.ToLocal(GetNode<KinematicBody2D>("../../../../Player").Position);}
 		catch {ChangeState("BunsterWander");}
 	}
-
-	public override void Hurt(int value) 
-	{
-		base.Hurt(value);
-		GD.Print(Owner.Name + " was damaged for " + value);
-	}
 }

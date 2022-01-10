@@ -52,30 +52,8 @@ percent_visible = false
 pause_mode = 2
 visible = false
 
-[node name="Header" parent="Pause Menu/VBoxContainer" index="0"]
-margin_top = 257.0
-margin_bottom = 271.0
-
-[node name="Resume" parent="Pause Menu/VBoxContainer" index="1"]
-margin_top = 275.0
-margin_bottom = 295.0
-
-[node name="Settings" parent="Pause Menu/VBoxContainer" index="2"]
-visible = false
-
-[node name="Main Menu" parent="Pause Menu/VBoxContainer" index="3"]
-margin_top = 299.0
-margin_bottom = 319.0
-
-[node name="Exit" parent="Pause Menu/VBoxContainer" index="4"]
-margin_top = 323.0
-margin_bottom = 343.0
-
 [connection signal="pressed" from="Main Menu/VBoxContainer/Continue" to="StateMachine/MainMenu" method="_on_Continue_pressed"]
 [connection signal="pressed" from="Main Menu/VBoxContainer/Exit" to="StateMachine/MainMenu" method="_on_Exit_pressed"]
-[connection signal="pressed" from="Pause Menu/VBoxContainer/Resume" to="StateMachine/PauseMenu" method="_on_Resume_pressed"]
-[connection signal="pressed" from="Pause Menu/VBoxContainer/Main Menu" to="StateMachine/PauseMenu" method="_on_Main_Menu_pressed"]
-[connection signal="pressed" from="Pause Menu/VBoxContainer/Exit" to="StateMachine/PauseMenu" method="_on_Exit_pressed"]
 
 [editable path="Main Menu"]
 [editable path="HUD"]

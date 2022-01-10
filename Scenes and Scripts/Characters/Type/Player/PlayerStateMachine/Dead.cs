@@ -16,7 +16,8 @@ public class Dead : PlayerState
         if (animName.Contains("die"))
         {
             PSM.ChangeState("Idling");
-            Owner.GetNode<Node>("../").Call("SpawnPlayer");
+			Owner.GetNode<Node>("../").Call("map.ResetWorld");
+			Owner.GetNode<Node>("../").Call("SpawnPlayer");
         }
     }
 }

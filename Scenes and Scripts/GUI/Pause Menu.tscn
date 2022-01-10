@@ -24,31 +24,34 @@ __meta__ = {
 
 [node name="Header" type="Label" parent="VBoxContainer"]
 margin_top = 245.0
-margin_right = 83.0
+margin_right = 132.0
 margin_bottom = 259.0
-text = "Pause Menu"
+text = "Paused"
 align = 1
 
-[node name="Resume" type="Button" parent="VBoxContainer"]
+[node name="Continue" type="Button" parent="VBoxContainer"]
 margin_top = 263.0
-margin_right = 83.0
+margin_right = 132.0
 margin_bottom = 283.0
-text = "Resume"
+text = "Continue"
 
 [node name="Settings" type="Button" parent="VBoxContainer"]
 margin_top = 287.0
-margin_right = 83.0
+margin_right = 132.0
 margin_bottom = 307.0
+disabled = true
 text = "Settings"
 
-[node name="Main Menu" type="Button" parent="VBoxContainer"]
+[node name="Quit to Main Menu" type="Button" parent="VBoxContainer"]
 margin_top = 311.0
-margin_right = 83.0
+margin_right = 132.0
 margin_bottom = 331.0
-text = "Main Menu"
+disabled = true
+text = "Quit to Main Menu"
 
-[node name="Exit" type="Button" parent="VBoxContainer"]
+[node name="Quit to Desktop" type="Button" parent="VBoxContainer"]
 margin_top = 335.0
-margin_right = 83.0
+margin_right = 132.0
 margin_bottom = 355.0
-text = "Exit Game"
+disabled = true
+text = "Quit to Desktop"

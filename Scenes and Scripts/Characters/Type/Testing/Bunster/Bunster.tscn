@@ -65,7 +65,7 @@ height = 70.0
 [node name="Bunster" instance=ExtResource( 1 )]
 scale = Vector2( 0.25, 0.25 )
 
-[node name="StateMachine" parent="." index="0"]
+[node name="StateMachine" parent="." index="1"]
 script = ExtResource( 3 )
 
 [node name="BunsterWander" type="Node" parent="StateMachine" index="0"]
@@ -81,10 +81,11 @@ script = ExtResource( 4 )
 [node name="BunsterAttacking" type="Node" parent="StateMachine" index="2"]
 script = ExtResource( 6 )
 
-[node name="Sprite" parent="." index="1"]
+[node name="Sprite" parent="." index="2"]
 texture = ExtResource( 2 )
 
 [node name="DamageArea" parent="Sprite" index="0"]
+visible = false
 position = Vector2( 72, 4 )
 monitoring = false
 
@@ -99,7 +100,7 @@ position = Vector2( 0, 17 )
 rotation = 1.5708
 shape = SubResource( 4 )
 
-[node name="AnimationPlayer" parent="." index="2"]
+[node name="AnimationPlayer" parent="." index="3"]
 anims/attack_0 = SubResource( 10 )
 anims/attack_1 = SubResource( 11 )
 anims/attack_2 = SubResource( 12 )
@@ -113,14 +114,14 @@ anims/run_1 = SubResource( 15 )
 anims/run_2 = SubResource( 16 )
 anims/run_3 = SubResource( 17 )
 
-[node name="CollisionShape2D" parent="." index="3"]
-position = Vector2( 0, 17 )
-rotation = 1.5708
-shape = SubResource( 5 )
-
 [node name="Target" type="RayCast2D" parent="." index="4"]
 enabled = true
 cast_to = Vector2( 0, 250 )
+
+[node name="CollisionShape2D" parent="." index="5"]
+position = Vector2( 0, 17 )
+rotation = 1.5708
+shape = SubResource( 5 )
 
 [connection signal="timeout" from="StateMachine/BunsterWander/BoredTimer" to="StateMachine/BunsterWander" method="_on_BoredTimer_timeout"]
 [connection signal="area_entered" from="Sprite/DamageArea" to="StateMachine/BunsterAttacking" method="_on_DamageArea_area_entered"]

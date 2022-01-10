@@ -13,6 +13,6 @@ public class Staggered : PlayerState
 
 	public void _on_AnimationPlayer_animation_finished(string animName)
 	{
-		PSM.ChangeState("Idling");
+		if (animName.Contains("stagger")) PSM.ChangeState("Idling");
 	}
 }
