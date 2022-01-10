@@ -5,13 +5,11 @@ using System.Collections.Generic;
 
 public class GUIStateMachine : _DefaultStateMachine
 {
-    List<_GUIState> menuStates;
-
-    public override void _Ready()
+	public override void _Ready()
     {
         base._Ready();
 
-        menuStates = GetChildren().OfType<_GUIState>().ToList();
+        List<_GUIState> menuStates = GetChildren().OfType<_GUIState>().ToList();
 
         for (int m = 0; m < menuStates.Count; m++)
             menuStates[m].GSM = this;

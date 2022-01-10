@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes and Scripts/GUI/GUI.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes and Scripts/Levels/LevelStates/LS_TheWarren.cs" type="Script" id=2]
-[ext_resource path="res://Scenes and Scripts/Levels/LevelStates/LS_TitleScreen.cs" type="Script" id=3]
+[ext_resource path="res://Scenes and Scripts/Levels/LevelStates/TitleScreen.cs" type="Script" id=2]
+[ext_resource path="res://Scenes and Scripts/Levels/LevelStates/TheWarren.cs" type="Script" id=3]
 [ext_resource path="res://Scenes and Scripts/MainScene.cs" type="Script" id=4]
 [ext_resource path="res://Scenes and Scripts/Levels/LevelStates/LevelStateMachine.cs" type="Script" id=5]
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Player/Player.tscn" type="PackedScene" id=6]
@@ -16,10 +16,10 @@ script = ExtResource( 4 )
 script = ExtResource( 5 )
 
 [node name="TitleScreen" type="Node" parent="LevelStateMachine"]
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 
 [node name="TheWarren" type="Node" parent="LevelStateMachine"]
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 
 [node name="GUI" parent="." instance=ExtResource( 1 )]
 
@@ -30,10 +30,9 @@ position = Vector2( 645, 413 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
+zoom = Vector2( 2, 2 )
 
-[connection signal="pressed" from="GUI/Main Menu/VBoxContainer/Continue" to="GUI/StateMachine/MainMenu" method="_on_Continue_pressed"]
 [connection signal="pressed" from="GUI/Main Menu/VBoxContainer/Continue" to="LevelStateMachine/TitleScreen" method="_on_Continue_pressed"]
-[connection signal="pressed" from="GUI/Main Menu/VBoxContainer/Exit" to="GUI/StateMachine/MainMenu" method="_on_Exit_pressed"]
 
 [editable path="GUI"]
 [editable path="GUI/Main Menu"]

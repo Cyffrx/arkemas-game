@@ -40,7 +40,7 @@ public class _DefaultStateMachine : Node
 		LastState = CurrentState;
 		state = _state;
 		CurrentState = _state.GetType().ToString();
-		GD.Print("State " + LastState + " changed to " + CurrentState);
+		// GD.Print("State " + LastState + " changed to " + CurrentState);
 
 		state.OnStart(message);
 		EmitSignal(nameof(PostStart));
