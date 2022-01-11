@@ -2,31 +2,37 @@ using Godot;
 
 public class BunsterWander : BunsterState
 {
-	[Export] private bool ShouldWander = true;
-	private Vector2 _velocity;
-	Timer boredTimer;
-	private RandomNumberGenerator rng = new RandomNumberGenerator();
-
 	public override void _Ready()
 	{
 		base._Ready();
-
-		rng.Randomize();
-		boredTimer = GetChild<Timer>(0);
-		_velocity = Vector2.Right;
-		PickRandomDirection();
 	}
 	public override void UpdateState(float _delta)
 	{
 		BSM.animationPlayer.Play("idle_"+BSM.Direction);
-		BSM.kb.MoveAndSlide(BSM.WalkSpeed * _velocity.Normalized());
-	}
-	
-	public void PickRandomDirection() { _velocity = _velocity.Rotated(rng.RandfRange(-2.0f, 2.0f)); }
+		
+		// check if bunny near point
+		//	if they are, generate a new one
+		// move to point
 
-	public void _on_BoredTimer_timeout()
+		if (BSM.rayCast2D.IsColliding())
+			BSM.moveTo = BSM.roamingArea.GeneratePosition2D();
+
+		if (BSM.kb.GlobalPosition.DistanceTo(BSM.moveTo) < 10.0f)
+			BSM.moveTo = BSM.roamingArea.GeneratePosition2D();
+
+		BSM.kb.MoveAndSlide(
+			BSM.kb.GlobalPosition.DirectionTo(BSM.moveTo).Normalized() * BSM.WalkSpeed
+			);
+		
+		BSM.rayCast2D.CastTo = BSM.kb.ToLocal(BSM.moveTo);
+	}
+
+	public void _on_InteractionZone_area_entered(Area2D area)
 	{
-		PickRandomDirection();
-		boredTimer.Start();
+		if (area.IsInGroup("aecarialSource"))
+		{
+			BSM.ChangeState("BunsterChase");
+			BSM.Target = area;
+		}
 	}
 }

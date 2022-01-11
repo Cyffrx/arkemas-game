@@ -4,8 +4,11 @@ using System.Collections.Generic;
 
 public class BunsterStateMachine : ActorStateMachine
 {
+	public RoamingArea roamingArea;
 	public Area2D Target;
 	public AudioStream lungeSound;
+	public RayCast2D rayCast2D;
+	public Vector2 moveTo;
 
 	public override void _Ready()
 	{
@@ -17,6 +20,10 @@ public class BunsterStateMachine : ActorStateMachine
 
 		RunSpeed = 100;
 		WalkSpeed = 50;
+		
+		rayCast2D = Owner.GetNode<RayCast2D>("RayCast2D");
+		roamingArea = Owner.GetParent() as RoamingArea;
+		// moveTo = Owner.GetNode<Position2D>("Position2D");
 
 		lungeSound = ResourceLoader.Load("res://Sounds/bunsterScream/bunsterScream.wav") as AudioStream;
 
@@ -24,19 +31,5 @@ public class BunsterStateMachine : ActorStateMachine
 		for (int i = 0; i < bunsterStates.Count; i++) bunsterStates[i].BSM = this;
 
 		ChangeState(bunsterStates[0].Name);
-	}
-
-	public void _on_InteractionZone_area_entered(Area2D area)
-	{
-		if (area.IsInGroup("aecarialSource"))
-		{
-			ChangeState("BunsterChase");
-			Target = area;
-		}
-	}
-
-	public void _on_InteractionZone_area_exited(Area2D area)
-	{
-		if (area == Target) ChangeState("BunsterWander");
 	}
 }

@@ -23,4 +23,9 @@ public class BunsterChase : BunsterState
 		if (rayCast2D.IsColliding())
 			if (BSM.kb.ToLocal(BSM.Target.GlobalPosition).Length() <= 250) BSM.ChangeState("BunsterAttacking");
 	}
+
+	public void _on_InteractionZone_area_exited(Area2D area)
+	{
+		if (area == BSM.Target) BSM.ChangeState("BunsterWander");
+	}
 }

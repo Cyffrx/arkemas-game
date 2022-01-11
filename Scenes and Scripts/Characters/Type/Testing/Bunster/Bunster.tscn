@@ -63,21 +63,16 @@ resource_name = "run_3"
 loop = true
 
 [sub_resource type="CapsuleShape2D" id=5]
-radius = 44.0
-height = 70.0
+radius = 4.99997
+height = 6.00006
 
 [node name="Bunster" instance=ExtResource( 1 )]
-scale = Vector2( 0.25, 0.25 )
 
 [node name="StateMachine" parent="." index="1"]
 script = ExtResource( 3 )
 
 [node name="BunsterWander" type="Node" parent="StateMachine" index="0"]
 script = ExtResource( 5 )
-
-[node name="BoredTimer" type="Timer" parent="StateMachine/BunsterWander" index="0"]
-wait_time = 3.0
-autostart = true
 
 [node name="BunsterChase" type="Node" parent="StateMachine" index="1"]
 script = ExtResource( 4 )
@@ -93,10 +88,10 @@ wait_time = 5.0
 one_shot = true
 
 [node name="Sprite" parent="." index="2"]
+scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 2 )
 
 [node name="DamageArea" parent="Sprite" index="0"]
-visible = false
 position = Vector2( 72, 4 )
 monitoring = false
 
@@ -129,16 +124,17 @@ anims/run_2 = SubResource( 16 )
 anims/run_3 = SubResource( 17 )
 
 [node name="CollisionShape2D" parent="." index="4"]
-position = Vector2( 0, 17 )
+position = Vector2( 0, 1 )
 rotation = 1.5708
 shape = SubResource( 5 )
 
 [node name="RayCast2D" type="RayCast2D" parent="." index="5"]
 enabled = true
 
-[connection signal="timeout" from="StateMachine/BunsterWander/BoredTimer" to="StateMachine/BunsterWander" method="_on_BoredTimer_timeout"]
+[node name="Position2D" type="Position2D" parent="." index="6"]
+
 [connection signal="timeout" from="StateMachine/BunsterDead/BodyDecayTimer" to="StateMachine/BunsterDead" method="_on_BodyDecayTimer_timeout"]
 [connection signal="area_entered" from="Sprite/DamageArea" to="StateMachine/BunsterAttacking" method="_on_DamageArea_area_entered"]
-[connection signal="area_entered" from="Sprite/InteractionZone" to="StateMachine" method="_on_InteractionZone_area_entered"]
-[connection signal="area_exited" from="Sprite/InteractionZone" to="StateMachine" method="_on_InteractionZone_area_exited"]
+[connection signal="area_entered" from="Sprite/InteractionZone" to="StateMachine/BunsterWander" method="_on_InteractionZone_area_entered"]
+[connection signal="area_exited" from="Sprite/InteractionZone" to="StateMachine/BunsterChase" method="_on_InteractionZone_area_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/BunsterAttacking" method="_on_AnimationPlayer_animation_finished"]

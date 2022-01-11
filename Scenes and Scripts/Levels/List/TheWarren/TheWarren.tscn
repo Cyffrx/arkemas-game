@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes and Scripts/Levels/List/_LevelTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Testing/Bunster/Bunster.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Art Assets/TestArt/Level/mainlevbuild.png" type="Texture" id=3]
 [ext_resource path="res://Scenes and Scripts/Objects/Item Pickups/Torch.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes and Scripts/Characters/Type/Testing/Adventurer/Adventurer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes and Scripts/Levels/Zones/RoamingArea/RoamingArea.tscn" type="PackedScene" id=6]
 
 [sub_resource type="NavigationPolygon" id=2]
 vertices = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -483,8 +484,25 @@ tile_data = PoolIntArray( -65538, 536870923, 0, -65537, 536870923, 0, -131072, 5
 [node name="Adventurer" parent="Characters" index="0" instance=ExtResource( 5 )]
 position = Vector2( 1432, 162 )
 
-[node name="Bunster" parent="Characters/Enemies/Static" index="0" instance=ExtResource( 2 )]
-position = Vector2( 1467, 239 )
+[node name="SoloBunster" parent="Characters/Enemies/Static" index="0" instance=ExtResource( 6 )]
+position = Vector2( 1281, 935 )
+_radius = 125.0
+
+[node name="Bunster" parent="Characters/Enemies/Static/SoloBunster" index="2" instance=ExtResource( 2 )]
+position = Vector2( -4, -4 )
+
+[node name="SoloBunster2" parent="Characters/Enemies/Static" index="1" instance=ExtResource( 6 )]
+position = Vector2( 176, 162 )
+_radius = 500.0
+
+[node name="Bunster" parent="Characters/Enemies/Static/SoloBunster2" index="2" instance=ExtResource( 2 )]
+position = Vector2( -36, -32 )
+
+[node name="Bunster2" parent="Characters/Enemies/Static/SoloBunster2" index="3" instance=ExtResource( 2 )]
+position = Vector2( -121, 175 )
+
+[node name="Bunster3" parent="Characters/Enemies/Static/SoloBunster2" index="4" instance=ExtResource( 2 )]
+position = Vector2( 160, -71 )
 
 [node name="Torch" parent="Items/Static" index="0" instance=ExtResource( 4 )]
 visible = false
