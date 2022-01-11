@@ -24,7 +24,6 @@ script = ExtResource( 7 )
 
 [node name="Main Menu" parent="." instance=ExtResource( 1 )]
 pause_mode = 2
-visible = false
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
 visible = false
@@ -51,9 +50,26 @@ percent_visible = false
 [node name="Pause Menu" parent="." instance=ExtResource( 2 )]
 pause_mode = 2
 visible = false
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -400.0
+margin_bottom = 400.0
+
+[node name="VBoxContainer" parent="Pause Menu" index="0"]
+margin_left = -66.0
+margin_right = 66.0
+
+[node name="Quit to Main Menu" parent="Pause Menu/VBoxContainer" index="3"]
+disabled = false
+
+[node name="Quit to Desktop" parent="Pause Menu/VBoxContainer" index="4"]
+disabled = false
 
 [connection signal="pressed" from="Main Menu/VBoxContainer/Continue" to="StateMachine/MainMenu" method="_on_Continue_pressed"]
 [connection signal="pressed" from="Main Menu/VBoxContainer/Exit" to="StateMachine/MainMenu" method="_on_Exit_pressed"]
+[connection signal="pressed" from="Pause Menu/VBoxContainer/Continue" to="StateMachine/PauseMenu" method="_on_Continue_pressed"]
+[connection signal="pressed" from="Pause Menu/VBoxContainer/Quit to Main Menu" to="StateMachine/PauseMenu" method="_on_Quit_to_Main_Menu_pressed"]
+[connection signal="pressed" from="Pause Menu/VBoxContainer/Quit to Desktop" to="StateMachine/PauseMenu" method="_on_Quit_to_Desktop_pressed"]
 
 [editable path="Main Menu"]
 [editable path="HUD"]

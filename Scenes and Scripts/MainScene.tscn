@@ -12,6 +12,8 @@ script = ExtResource( 4 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
+[node name="CurrentLevel" type="Node" parent="."]
+
 [node name="LevelStateMachine" type="Node" parent="."]
 script = ExtResource( 5 )
 
@@ -23,8 +25,6 @@ script = ExtResource( 3 )
 
 [node name="GUI" parent="." instance=ExtResource( 1 )]
 
-[node name="CurrentLevel" type="Node" parent="."]
-
 [node name="Player" parent="." instance=ExtResource( 6 )]
 position = Vector2( 645, 413 )
 scale = Vector2( 0.25, 0.25 )
@@ -35,6 +35,7 @@ zoom = Vector2( 0.35, 0.35 )
 
 [connection signal="pressed" from="GUI/Main Menu/VBoxContainer/Continue" to="LevelStateMachine/TitleScreen" method="_on_Continue_pressed"]
 [connection signal="area_entered" from="Player/Sprite/DamageArea" to="Player/StateMachine/Attacking" method="_on_DamageArea_area_entered"]
+[connection signal="area_entered" from="Player/Sprite/InteractionZone" to="Player/StateMachine" method="_on_InteractionZone_area_entered"]
 
 [editable path="GUI"]
 [editable path="GUI/Main Menu"]

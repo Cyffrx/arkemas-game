@@ -54,14 +54,15 @@ public class PlayerStateMachine : ActorStateMachine
 
 		if (Aecarium.Value <= 0) Die();
 
+		// both of these need to be tidied up
 		#region aecarial light
 		float calculatedEnergy = Mathf.Log( 2.25f * Aecarium.Percentage + 1f);
-		aecarialLight.Energy = calculatedEnergy > .75f ? .75f : calculatedEnergy;
+		aecarialLight.Energy = calculatedEnergy > .5f ? .5f : calculatedEnergy;
 		#endregion
 
 		#region camera
 		float zoomLevel = calculatedEnergy > .35f ? .35f : calculatedEnergy;
-		zoomLevel = zoomLevel == 0 ? .15f: zoomLevel; 
+		zoomLevel = zoomLevel == 0 ? .15f: zoomLevel > .05f ? zoomLevel : .05f; 
 
 		camera.Zoom = new Vector2(zoomLevel, zoomLevel);
 		#endregion
@@ -94,12 +95,20 @@ public class PlayerStateMachine : ActorStateMachine
 
 	public override void Die()
 	{
+		EmitSignal(nameof(Died));
 		ChangeState("Dead");
 	}
 
-	public override void Dead()
+	public void _on_InteractionZone_area_entered(Area2D area)
 	{
-		base.Dead();
-		// restart game
+		if (area.IsInGroup("pickup"))
+		{
+			if (area.IsInGroup("torch"))
+			{
+				// torches should probably temporarily increase your maximum aecarium
+				Aecarium.Value = Aecarium.Value + 100;
+				area.QueueFree();
+			}
+		}
 	}
 }

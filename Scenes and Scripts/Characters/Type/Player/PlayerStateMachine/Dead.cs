@@ -14,6 +14,14 @@ public class Dead : PlayerState
     
     public void _on_AnimationPlayer_animation_finished(string animName)
     {
-        if (animName.Contains("die")) PSM.Dead();
+        if (animName.Contains("die"))
+        {
+            if (PSM.Aecarium.Value == PSM.Aecarium.Min)
+                Owner.Owner.GetNode<LevelStateMachine>("LevelStateMachine").Call("Reload", PSM.kb.GlobalPosition);
+            else 
+                Owner.Owner.GetNode<LevelStateMachine>("LevelStateMachine").Call("Reload");
+
+		    GetParent()._Ready();
+        }
     }
 }

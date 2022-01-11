@@ -20,8 +20,6 @@ public class BunsterWander : BunsterState
 	{
 		BSM.animationPlayer.Play("idle_"+BSM.Direction);
 		BSM.kb.MoveAndSlide(BSM.WalkSpeed * _velocity.Normalized());
-
-		if (BSM.Target.CastTo.Length() < 1000.0f) BSM.ChangeState("BunsterChase");
 	}
 	
 	public void PickRandomDirection() { _velocity = _velocity.Rotated(rng.RandfRange(-2.0f, 2.0f)); }

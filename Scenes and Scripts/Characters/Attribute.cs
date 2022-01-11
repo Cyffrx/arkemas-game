@@ -18,7 +18,13 @@ public class Attribute : Node
 
 	public float Percentage {get { return (Value * 100f / Max) * .01f; } }
 
-	private int _tryUpdate (int value) { return (value <= _max && value >= _min) ? value : _value; }
+	private int _tryUpdate (int value) 
+	{ 
+		if (value >= _max) value = _max;
+		else if (value <= _min) value = _min;
+		
+		return value;
+	}
 
 	public Attribute(string name, int maxValue, int minValue, int value)
 	{

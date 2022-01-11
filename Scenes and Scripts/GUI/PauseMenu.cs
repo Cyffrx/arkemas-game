@@ -24,9 +24,9 @@ public class PauseMenu : _GUIState
         Owner.GetNode<Control>("Pause Menu").Visible = false;
     }
 
-    public void _on_Resume_pressed() { GSM.ChangeState("HUD"); }
+    public void _on_Continue_pressed() { GSM.ChangeState("HUD"); }
 
-    public void _on_Main_Menu_pressed() { GSM.ChangeState("MainMenu"); }
+    public void _on_Quit_to_Main_Menu_pressed() { GSM.ChangeState("MainMenu"); }
 
-    public void _on_Exit_pressed() { GetTree().Quit(); }
+    public void _on_Quit_to_Desktop_pressed() { GetTree().Quit(); }
 }

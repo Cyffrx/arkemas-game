@@ -23,17 +23,13 @@ public class LevelStateMachine : _DefaultStateMachine
 		ChangeState(levelStates[0].Name);
 	}
 
-
-	public override void ChangeState(string stateName, Dictionary<string, object> message = null)
+	public void Reload()
 	{
-		base.ChangeState(stateName, message);
+		ChangeState(CurrentState);
+	}
 
-		// message is going to have [Level] == [resource path]
-		// PackedScene nextLevel_packed = message["NextLevel"] as PackedScene;
-		// Node nextLevel = nextLevel_packed.Instance();
-		// Owner.AddChild(nextLevel);
-		
-		// CurrentLevel.QueueFree();
-		// CurrentLevel = nextLevel;
+	public void Reload(Vector2 deathPosition)
+	{
+		ChangeState(CurrentState, new Dictionary<string, object> {{"PlayerDeathPosition", deathPosition}});
 	}
 }

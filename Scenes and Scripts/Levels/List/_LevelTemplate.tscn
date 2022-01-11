@@ -16,9 +16,19 @@ format = 1
 cell_size = Vector2( 32, 32 )
 format = 1
 
-[node name="Enemies" type="Node" parent="."]
+[node name="Characters" type="Node" parent="."]
+
+[node name="Enemies" type="Node" parent="Characters"]
+
+[node name="Dynamic" type="Node" parent="Characters/Enemies"]
+
+[node name="Static" type="Node" parent="Characters/Enemies"]
 
 [node name="Items" type="Node" parent="."]
+
+[node name="Dynamic" type="Node" parent="Items"]
+
+[node name="Static" type="Node" parent="Items"]
 
 [node name="Scripting" type="Node" parent="."]
 

@@ -6,6 +6,8 @@ using System.Collections.Generic;
 public class ActorStateMachine : _DefaultStateMachine
 {
 	#region stats
+	bool alive;
+	bool isAlive;
 	public Attribute Health;
 	public Attribute Aecarium;
 	public Attribute Stamina;
@@ -19,7 +21,6 @@ public class ActorStateMachine : _DefaultStateMachine
 	#endregion
 
 	#region events
-	[Signal] public delegate void Dying();
 	[Signal] public delegate void Died();
 	#endregion
 
@@ -39,6 +40,7 @@ public class ActorStateMachine : _DefaultStateMachine
 		kb = (KinematicBody2D) Owner;
 		
 		sprite = Owner.GetNode<Sprite>("Sprite");
+		isAlive = true;
 
 		// List<ActorState> actorStates = this.GetChildren().OfType<ActorState>().ToList();
 		// for (int i = 0; i < actorStates.Count; i++) actorStates[i].ASM = this;
@@ -48,7 +50,8 @@ public class ActorStateMachine : _DefaultStateMachine
 
 	public override void _Process(float delta)
 	{
-		if (Health.Value <= 0) Die();
+		isAlive = Health.Value > 0;
+		if (!isAlive) Die();
 	}
 
 	#region temporary
@@ -73,12 +76,8 @@ public class ActorStateMachine : _DefaultStateMachine
 
 	public virtual void Die()
 	{
-		EmitSignal(nameof(Dying));
-	}
-
-	public virtual void Dead()
-	{
 		EmitSignal(nameof(Died));
+		ChangeState("BunsterDead");
 	}
 
 	#endregion
