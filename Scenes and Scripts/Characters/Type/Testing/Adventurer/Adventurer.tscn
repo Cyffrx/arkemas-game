@@ -22,7 +22,7 @@ hframes = 5
 [node name="CollisionShape2D" parent="Sprite/InteractionZone" index="0"]
 shape = SubResource( 2 )
 
-[node name="Hitbox" parent="Sprite" index="2" groups=["aecarialSource"]]
+[node name="Hitbox" parent="Sprite" index="2" groups=["aecarialSource", "lightSource"]]
 
 [node name="CollisionShape2D" parent="Sprite/Hitbox" index="0"]
 shape = SubResource( 3 )

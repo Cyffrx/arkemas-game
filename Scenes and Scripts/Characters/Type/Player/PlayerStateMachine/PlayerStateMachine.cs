@@ -16,7 +16,9 @@ public class PlayerStateMachine : ActorStateMachine
 
 	public AudioStream footstepSound;
 	public AudioStream attackSound;
-	
+	private bool isLit = false;
+	public Area2D interactionZone;
+
     public override void _Ready()
     {
         base._Ready();
@@ -36,6 +38,7 @@ public class PlayerStateMachine : ActorStateMachine
 		StaminaDelayTimer = Owner.GetNode<Timer>("Timers/StaminaDelay");
 		#endregion
 		
+		interactionZone = Owner.GetNode<Area2D>("Sprite/InteractionZone");
 		aecarialLight = Owner.GetNode<Light2D>("Light2D");
 		camera = Owner.GetNode<Camera2D>("Camera2D");
 
@@ -70,7 +73,8 @@ public class PlayerStateMachine : ActorStateMachine
 
 	public void _on_AecariumDecay_timeout()
 	{
-		Aecarium.Value -= 1;
+		if (!isLit) Aecarium.Value -= 1;
+		else Aecarium.Value += 1;
 		aecariumDecayTimer.Start();
 	}
 	public void _on_StaminaRegen_timeout()
@@ -110,5 +114,28 @@ public class PlayerStateMachine : ActorStateMachine
 				area.QueueFree();
 			}
 		}
+	}
+
+	public void _on_InteractionZone_area_exited(Area2D area)
+	{
+	}
+
+	public void _on_Hitbox_area_entered(Area2D area)
+	{
+		if (area.IsInGroup("lightSource"))
+		{
+			GD.Print("is in light source");
+			isLit = true;
+		}
+	}
+
+	public void _on_Hitbox_area_exited(Area2D area)
+	{
+		if (area.IsInGroup("lightSource"))
+		{
+			GD.Print("is in light source");
+			isLit = false;
+		}
+	
 	}
 }
