@@ -464,7 +464,7 @@ points = PoolVector2Array( 16, 32, 0, 32, 0, 16, 16, 16 )
 color = Color( 0.0235294, 0, 0.0431373, 1 )
 
 [node name="PlayerSpawn" parent="." index="1"]
-position = Vector2( 876, 1393 )
+position = Vector2( 1340, 310 )
 
 [node name="Floors" parent="TileMaps/Navigation2D" index="0"]
 tile_set = SubResource( 1 )
