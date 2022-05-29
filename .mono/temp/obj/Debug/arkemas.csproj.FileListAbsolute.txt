@@ -15,3 +15,5 @@ C:\Users\Cash Muehl\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas.A
 C:\Users\Cash Muehl\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas.csproj.CoreCompileInputs.cache
 C:\Users\Cash Muehl\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas.dll
 C:\Users\Cash Muehl\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas.pdb
+C:\Users\souls\Documents\GitHub\arkemas-game\.mono\temp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\souls\Documents\GitHub\arkemas-game\.mono\temp\obj\Debug\arkemas.csproj.CopyComplete

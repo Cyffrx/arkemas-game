@@ -1,0 +1,60 @@
+{
+	"00000000" : {
+		"name":"Player", 
+		"text":"Hello. I'm Player. Who are you?",
+		"next": "00000001",
+		"responses" : []
+	},
+	"00000001" : {
+		"name":"Adventurer", 
+		"text":"That's a complicated question...",
+		"next": "00000002",
+		"responses" : []
+	},
+	"00000002" : {
+		"name":"Adventurer", 
+		"text":"Have you ever heard of the syldera?",
+		"next": "mc",
+		"responses" : [
+			{
+				"name":"Player",
+				"text" : "Of course.",
+				"next" : "00000010"
+			},
+			{
+				"name":"Player",
+				"text" : "I might have heard of them before.",
+				"next" : "00000020"
+			},
+			{
+				"name":"Player",
+				"text" : "Never.",
+				"next" : "00000030"
+			}
+		]
+	},
+	"00000010" : {
+		"name" : "Adventurer",
+		"text" : "Really? Well, I myself and one of them.",
+		"next" : "end",
+		"responses" : []
+	},
+	"00000020" : {
+		"name" : "Adventurer",
+		"text" : "Well, in short, Ahr created us to guide humans, but we were corruped by Keepers.",
+		"next" : "end",
+		"responses" : []
+	},
+	"00000030" : {
+		"name" : "Adventurer",
+		"text" : "Don't feel bad, our numbers have dwindled significantly since the spark of creation.",
+		"next" : "00000031",
+		"responses" : []
+	},
+	"00000031" : {
+		"name" : "Syldera",
+		"text" : "Ahr created us to guide the Ark, but we were corrupted by the Keepers.",
+		"next" : "end",
+		"responses" : []
+	}	
+}
