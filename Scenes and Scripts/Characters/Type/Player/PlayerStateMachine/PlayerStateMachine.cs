@@ -57,7 +57,7 @@ public class PlayerStateMachine : ActorStateMachine
 
 		if (Aecarium.Value <= 0) Die();
 
-		// both of these need to be tidied up
+		// both of these need to be cleaned up
 		#region aecarial light
 		float calculatedEnergy = Mathf.Log( 2.25f * Aecarium.Percentage + 1f);
 		aecarialLight.Energy = calculatedEnergy > .5f ? .5f : calculatedEnergy;
@@ -71,6 +71,20 @@ public class PlayerStateMachine : ActorStateMachine
 		#endregion
 	}
 
+	public override void Hurt(int value)
+	{
+		ChangeState("Staggered");
+
+		base.Hurt(value);
+	}
+
+	public override void Die()
+	{
+		EmitSignal(nameof(Died));
+		ChangeState("Dead");
+	}
+
+	#region stat timeouts
 	public void _on_AecariumDecay_timeout()
 	{
 		if (!isLit) Aecarium.Value -= 1;
@@ -89,20 +103,9 @@ public class PlayerStateMachine : ActorStateMachine
 		Heal(1);
 		healthRegenTimer.Start();
 	}
+	#endregion
 
-	public override void Hurt(int value)
-	{
-		ChangeState("Staggered");
-
-		base.Hurt(value);
-	}
-
-	public override void Die()
-	{
-		EmitSignal(nameof(Died));
-		ChangeState("Dead");
-	}
-
+	#region on collisions
 	public void _on_InteractionZone_area_entered(Area2D area)
 	{
 		if (area.IsInGroup("pickup"))
@@ -138,4 +141,5 @@ public class PlayerStateMachine : ActorStateMachine
 		}
 	
 	}
+	#endregion
 }

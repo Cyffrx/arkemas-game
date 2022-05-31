@@ -15,47 +15,54 @@ public class DialogueBox : Control
         public string Text { get; set; }
         public string Next { get; set; }
         public List<DialogueEntry> Responses {get; set;}
+        public Dictionary<string, string> PlayerKnowledgeStateChanges {get; set;}
     }
 
-    Dictionary<string, DialogueEntry> dialogs;
-    private Label Nameplate;
-    private List<Label> DisplayedText;
-    private VBoxContainer DisplayedTextContainer;
-
-    private DialogueEntry ActiveText;
+    public string DialogueFilePath = @"C:\Users\souls\Documents\GitHub\arkemas-game\Scenes and Scripts\Testing\Data\dialogue\testing\test.json";
+    Dictionary<string, DialogueEntry> DialogueTree;
+    
+    // reveals NPC name when mouse hovers over them
+    Label NamePlate;
+    
+    // contains the active dialogue entry
+    DialogueEntry ActiveText;
+    Label DialoguePlate;
+    
+    // revealed when a dialogue entry contains a list of responses
+    VBoxContainer ResponseContainer;
     
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         base._Ready();
 
-        this.MouseFilter = MouseFilterEnum.Ignore;
-
         //debug 
-        string path = @"C:\Users\souls\Documents\GitHub\arkemas-game\Scenes and Scripts\Testing\Data\dialogue\testing\test.json";
+        //string path = @"C:\Users\souls\Documents\GitHub\arkemas-game\Scenes and Scripts\Testing\Data\dialogue\testing\test.json";
         
-        Nameplate = GetNode<Label>("Panel/MarginContainer/VBoxContainer/SpeakerName");
-        DisplayedTextContainer = GetNode<VBoxContainer>("Panel/MarginContainer/VBoxContainer/HBoxContainer/TextContainer");
-        
-        DisplayedText = new List<Label>();
+        NamePlate = GetNode<Label>("VBox/NPCInformation/Nameplate");
+        DialoguePlate = GetNode<Label>("VBox/NPCInformation/Dialogue");
+        ResponseContainer = GetNode<VBoxContainer>("VBox/ResponseContainer");
         
         // if (File.Exists(path)) // want to check for this at some point
-        using (StreamReader reader = new StreamReader(path))
+        using (StreamReader reader = new StreamReader(DialogueFilePath))
         {
             string json = reader.ReadToEnd();
-            dialogs = JsonConvert.DeserializeObject<Dictionary<string, DialogueEntry>>(json);
+            DialogueTree = JsonConvert.DeserializeObject<Dictionary<string, DialogueEntry>>(json);
         }
-        
+
+        NamePlate.Modulate = new Color (0,0,0,0);
+
         SetDisplayedDialogue();
     }
 
-    // 00000000 should be the standard greeting dialogue
-    void SetDisplayedDialogue(string key = "00000000")
+    // public because externale vents might need to call this?
+    public void SetDisplayedDialogue(string key = "00000000")
     {
-        GD.Print("Displaying dialogue key " + key);
+        // refuse dialogue refresh if npc is prompting player input
+        if (key == "mc") return;
 
-        Nameplate.Text = "";
-        DisplayedText.Clear();
+        foreach( Node n in ResponseContainer.GetChildren())
+            n.QueueFree();
 
         // end obviously ends the conversation
         if (key == "end")
@@ -64,81 +71,74 @@ public class DialogueBox : Control
             return;
         }
 
-        // mc means that the prior dialogue prompts a player response
-        if (key == "mc")
-        {
-            
-            Nameplate.Text = ActiveText.Responses[0].Name;
-            // these dialogues also needs events added to them
-            for (int i = 0; i < ActiveText.Responses.Count; i++)
-            {
-                Label label = new Label
-                {
-                    Text = ActiveText.Responses[i].Text,
-                    SizeFlagsHorizontal = (int) SizeFlags.ShrinkCenter,   
-                };
-
-                label.Connect("mouse_entered", this, "_response_option_entered", new Godot.Collections.Array(new object[] {label}));
-                label.Connect("mouse_exited", this, "_response_option_exited", new Godot.Collections.Array(new object[] {label}));
-                label.Connect("gui_input", this, "_response_option_clicked", new Godot.Collections.Array(new object[] {label}));
-                
-                label.MouseFilter = MouseFilterEnum.Stop;
-
-                DisplayedText.Add(label);
-            }
-        }
-        // if it's not an mc or end, then display dialogue as normal
-        else
-        {
-           ActiveText = dialogs[key];
+        ActiveText = DialogueTree[key];
         
-            Nameplate.Text = ActiveText.Name;
-            
-            Label label = new Label
-            {
-                    Text = ActiveText.Text,
-                    SizeFlagsHorizontal = (int) SizeFlags.ShrinkCenter,
-            };
+        NamePlate.Text = ActiveText.Name;
+        DialoguePlate.Text = ActiveText.Text;
 
-            DisplayedText.Add(label);
-        }
-
-        foreach( Node n in DisplayedTextContainer.GetChildren())
-            n.QueueFree();
-
-        for (int i = 0; i < DisplayedText.Count; i++)
+        for (int i = 0; i < ActiveText.Responses.Count; i++)
         {
-            DisplayedTextContainer.AddChild(DisplayedText[i]);
+            Label label = new Label();
+
+            label.Text = ActiveText.Responses[i].Text;
+            label.MouseFilter = MouseFilterEnum.Stop;
+
+            label.Connect("mouse_entered", this, "_response_option_entered", new Godot.Collections.Array(new object[] {label}));
+            label.Connect("mouse_exited", this, "_response_option_exited", new Godot.Collections.Array(new object[] {label}));
+            label.Connect("gui_input", this, "_response_option_activated", new Godot.Collections.Array(new object[] {label}));
+
+            label.MouseFilter = MouseFilterEnum.Stop;
+
+            ResponseContainer.AddChild(label);
         }
     }
 
     public void _response_option_entered(Label label)
     {
-        GD.Print("entered dialogue option");
         label.Modulate = new Color(1, 0, 0);
     }
     public void _response_option_exited(Label label)
     {
-        GD.Print("exited dialogue option");
         label.Modulate = new Color(1, 1, 1);
     }
-    public void _response_option_clicked(InputEvent inputEvent, Label label)
+    public void _response_option_activated(InputEvent inputEvent, Label label)
     {
-
+        // if not right click / interact
         if (!inputEvent.IsActionPressed("action_interact") ) return;
-        GD.Print("clicked response option");
-        SetDisplayedDialogue(ActiveText.Responses[DisplayedText.IndexOf(label)].Next);        
+        
+        Godot.Collections.Array responseLabels = ResponseContainer.GetChildren();
+
+        // i'd prefer to clean this up somehow
+        for (int i = 0; i < responseLabels.Count; i++)
+        {
+            Label checkLabel = responseLabels[i] as Label;
+
+            if (checkLabel == label)
+            {
+                GD.Print($"Dialogue option {i+1} of {ActiveText.Responses.Count} pressed [{label.Text}]\nProceeding with key [{ActiveText.Responses[i].Next}]");
+                SetDisplayedDialogue(ActiveText.Responses[i].Next);
+                return;
+            }
+        }
     }
 
     public void _on_Next_pressed()
     {
-        GD.Print("Fetch next dialogue.");
         SetDisplayedDialogue(ActiveText.Next);
     }
 
     public void _on_Exit_pressed()
     {
-        GD.Print("Closing Dialogue.");
-        QueueFree();
+        this.Modulate = new Color (0, 0, 0, 0);
+    }
+
+    public void _on_MarginContainer_mouse_entered()
+    {
+        NamePlate.Modulate = new Color (1,1,1,1);
+    }
+
+    public void _on_MarginContainer_mouse_exited()
+    {
+        NamePlate.Modulate = new Color (0,0,0,0);
     }
 }

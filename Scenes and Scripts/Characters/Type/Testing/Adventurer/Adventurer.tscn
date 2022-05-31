@@ -27,10 +27,10 @@ shape = SubResource( 2 )
 [node name="CollisionShape2D" parent="Sprite/Hitbox" index="0"]
 shape = SubResource( 3 )
 
-[node name="CollisionShape2D" parent="." index="4"]
-shape = SubResource( 4 )
-
-[node name="Light2D" type="Light2D" parent="." index="5"]
+[node name="Light2D" type="Light2D" parent="." index="4"]
 visible = false
 texture = ExtResource( 3 )
 energy = 0.65
+
+[node name="CollisionShape2D" parent="." index="5"]
+shape = SubResource( 4 )
