@@ -2,35 +2,40 @@
 
 [ext_resource path="res://Art Assets/TestArt/Characters/Lively NPCs - medieval/sprite sheets/adventurer_02.png" type="Texture" id=1]
 [ext_resource path="res://Scenes and Scripts/Characters/CharacterTemplate.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Art Assets/TestArt/Lights/light.png" type="Texture" id=3]
-
-[sub_resource type="CircleShape2D" id=2]
-radius = 20.0
-
-[sub_resource type="CapsuleShape2D" id=3]
-height = 10.0
+[ext_resource path="res://Scenes and Scripts/Characters/Type/Testing/Adventurer/Adventurer.cs" type="Script" id=4]
 
 [sub_resource type="CapsuleShape2D" id=4]
 height = 10.0
 
-[node name="Adventurer" instance=ExtResource( 2 )]
+[sub_resource type="CapsuleShape2D" id=3]
+height = 10.0
 
-[node name="Sprite" parent="." index="2"]
+[sub_resource type="CircleShape2D" id=2]
+radius = 30.0
+
+[node name="Adventurer" instance=ExtResource( 2 )]
+position = Vector2( 134, 111 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" parent="." index="2"]
+visible = false
+shape = SubResource( 4 )
+
+[node name="Sprite" parent="." index="3"]
 texture = ExtResource( 1 )
 hframes = 5
-
-[node name="CollisionShape2D" parent="Sprite/InteractionZone" index="0"]
-shape = SubResource( 2 )
 
 [node name="Hitbox" parent="Sprite" index="2" groups=["aecarialSource", "lightSource"]]
 
 [node name="CollisionShape2D" parent="Sprite/Hitbox" index="0"]
 shape = SubResource( 3 )
 
-[node name="Light2D" type="Light2D" parent="." index="4"]
-visible = false
-texture = ExtResource( 3 )
-energy = 0.65
+[node name="InteractionZone2" type="Area2D" parent="Sprite" index="3"]
+collision_layer = 16777216
+collision_mask = 16777216
 
-[node name="CollisionShape2D" parent="." index="5"]
-shape = SubResource( 4 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/InteractionZone2" index="0"]
+shape = SubResource( 2 )
+
+[connection signal="input_event" from="Sprite/InteractionZone2" to="." method="_on_InteractionZone_input_event"]

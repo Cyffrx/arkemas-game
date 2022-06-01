@@ -87,6 +87,7 @@ public class PlayerStateMachine : ActorStateMachine
 	#region stat timeouts
 	public void _on_AecariumDecay_timeout()
 	{
+		
 		if (!isLit) Aecarium.Value -= 1;
 		else Aecarium.Value += 1;
 		aecariumDecayTimer.Start();
@@ -126,19 +127,13 @@ public class PlayerStateMachine : ActorStateMachine
 	public void _on_Hitbox_area_entered(Area2D area)
 	{
 		if (area.IsInGroup("lightSource"))
-		{
-			GD.Print("is in light source");
 			isLit = true;
-		}
 	}
 
 	public void _on_Hitbox_area_exited(Area2D area)
 	{
 		if (area.IsInGroup("lightSource"))
-		{
-			GD.Print("is in light source");
 			isLit = false;
-		}
 	
 	}
 	#endregion

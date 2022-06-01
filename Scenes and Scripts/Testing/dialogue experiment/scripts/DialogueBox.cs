@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.IO;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Collections.Generic;
 // the player's responses will be displayed below the NPC
 public class DialogueBox : Control
 {
-    private class DialogueEntry
+    public class DialogueEntry
     {
         public string Key { get; set; }
         public string Name { get; set; }
@@ -18,44 +19,140 @@ public class DialogueBox : Control
         public Dictionary<string, string> PlayerKnowledgeStateChanges {get; set;}
     }
 
-    public string DialogueFilePath = @"C:\Users\souls\Documents\GitHub\arkemas-game\Scenes and Scripts\Testing\Data\dialogue\testing\test.json";
-    Dictionary<string, DialogueEntry> DialogueTree;
+    public class DialogueContainer
+    {
+        // load the conversation contained within the provided filepath
+        public void LoadNewConversation(string filepath)
+        {
+            this.DialogueFilePath = filepath;
+
+            // if file does not exist, return
+            if (!System.IO.File.Exists(filepath)) return;
+            
+            // attempt to read new file
+            using (StreamReader reader = new StreamReader(DialogueFilePath))
+            {
+                string json = reader.ReadToEnd();
+                Dialogue = JsonConvert.DeserializeObject<Dictionary<string, DialogueEntry>>(json);
+            }
+        }
+
+        // goes to the next sequential dialouge
+        public DialogueEntry GetDialogue(string key = "00000000")
+        {
+            return Dialogue[key];
+        }
+
+        // location of dialogue file
+        private string DialogueFilePath = @"C:\Users\souls\Documents\GitHub\arkemas-game\Scenes and Scripts\Testing\Data\dialogue\testing\test.json";
+
+        // entries read from dialogue file
+        private Dictionary<string, DialogueEntry> Dialogue;
+    }
     
-    // reveals NPC name when mouse hovers over them
+    #region vars
+    DialogueContainer dialogueContainer;
+    DialogueEntry de;
+    
+    // shows NPC name when mouse hovers over them
     Label NamePlate;
-    
-    // contains the active dialogue entry
-    DialogueEntry ActiveText;
+
+    // displays the current dialogue text
     Label DialoguePlate;
     
-    // revealed when a dialogue entry contains a list of responses
-    VBoxContainer ResponseContainer;
+    // displays player responses, if any
+    VBoxContainer ResponseDisplay;
+
+    public bool Active;
+    #endregion
     
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         base._Ready();
 
-        //debug 
-        //string path = @"C:\Users\souls\Documents\GitHub\arkemas-game\Scenes and Scripts\Testing\Data\dialogue\testing\test.json";
-        
         NamePlate = GetNode<Label>("VBox/NPCInformation/Nameplate");
+        NamePlate.Hide();
+
         DialoguePlate = GetNode<Label>("VBox/NPCInformation/Dialogue");
-        ResponseContainer = GetNode<VBoxContainer>("VBox/ResponseContainer");
-        
-        // if (File.Exists(path)) // want to check for this at some point
-        using (StreamReader reader = new StreamReader(DialogueFilePath))
-        {
-            string json = reader.ReadToEnd();
-            DialogueTree = JsonConvert.DeserializeObject<Dictionary<string, DialogueEntry>>(json);
-        }
+        ResponseDisplay = GetNode<VBoxContainer>("VBox/ResponseContainer");
 
-        NamePlate.Modulate = new Color (0,0,0,0);
+        dialogueContainer = new DialogueContainer();
+        Active = false;
 
-        SetDisplayedDialogue();
+        this.Hide();
     }
 
-    // public because externale vents might need to call this?
+    public void StartDialogue(string filename)
+    {
+        dialogueContainer.LoadNewConversation(filename);
+
+        Active = true;        
+        NextDialogue();
+
+        this.Show();
+    }
+
+    public void NextDialogue(string key = "00000000")
+    {
+        if (key == "end")
+        {
+            EndDialogue();
+            return;
+        }
+
+        foreach (Node n in ResponseDisplay.GetChildren())
+            n.QueueFree();
+
+        if (key == null) key = de.Next;
+        de = dialogueContainer.GetDialogue(key);
+
+        this.NamePlate.Text = de.Name;
+        this.DialoguePlate.Text = de.Text;
+
+        // in the event there's no dialogues, add a placeholder that'll continue
+        // using the next key of the current de
+        if (de.Responses.Count == 0)
+        {
+            DialogueEntry e = new DialogueEntry
+            {
+                Next = de.Next,
+                Text = "..."
+            };
+
+            AddResponse(e);
+        }
+
+        for (int i = 0; i < de.Responses.Count; i++)
+            AddResponse(de.Responses[i]);
+
+        GD.Print("dialogue set!");
+    }
+
+    public void AddResponse(DialogueEntry e)
+    {
+        Label label = new Label();
+
+        label.Text = e.Text;
+        label.MouseFilter = MouseFilterEnum.Stop;
+
+        label.Connect("mouse_entered", this, "_response_option_entered", new Godot.Collections.Array(new object[] {label}));
+        label.Connect("mouse_exited", this, "_response_option_exited", new Godot.Collections.Array(new object[] {label}));
+        label.Connect("gui_input", this, "_response_option_activated", new Godot.Collections.Array(new object[] {label}));
+
+        label.MouseFilter = MouseFilterEnum.Stop;
+
+        ResponseDisplay.AddChild(label);
+    }
+
+    public void EndDialogue()
+    {
+        Active = false;
+        this.Hide();
+    }
+
+    
+    /*
     public void SetDisplayedDialogue(string key = "00000000")
     {
         // refuse dialogue refresh if npc is prompting player input
@@ -92,53 +189,58 @@ public class DialogueBox : Control
             ResponseContainer.AddChild(label);
         }
     }
+    */
 
-    public void _response_option_entered(Label label)
-    {
-        label.Modulate = new Color(1, 0, 0);
-    }
-    public void _response_option_exited(Label label)
-    {
-        label.Modulate = new Color(1, 1, 1);
-    }
-    public void _response_option_activated(InputEvent inputEvent, Label label)
-    {
-        // if not right click / interact
-        if (!inputEvent.IsActionPressed("action_interact") ) return;
+    #region events
+
+        #region dialogue events
         
-        Godot.Collections.Array responseLabels = ResponseContainer.GetChildren();
+        // highlight / unhighlight hovered text
+        public void _response_option_entered(Label label) { label.Modulate = new Color(1, 0, 0); }
+        public void _response_option_exited(Label label) { label.Modulate = new Color(1, 1, 1); }
 
-        // i'd prefer to clean this up somehow
-        for (int i = 0; i < responseLabels.Count; i++)
+        // triggers on player selecting a dialogue option
+        public void _response_option_activated(InputEvent inputEvent, Label label)
         {
-            Label checkLabel = responseLabels[i] as Label;
-
-            if (checkLabel == label)
+            // if not right click / interact
+            if (!inputEvent.IsActionPressed("action_interact") ) return;
+            
+            // player selected response
+            Godot.Collections.Array children = ResponseDisplay.GetChildren();
+            
+            for (int i = 0; i < children.Count; i++)
             {
-                GD.Print($"Dialogue option {i+1} of {ActiveText.Responses.Count} pressed [{label.Text}]\nProceeding with key [{ActiveText.Responses[i].Next}]");
-                SetDisplayedDialogue(ActiveText.Responses[i].Next);
-                return;
+                Label lab = children[i] as Label;
+                if (label == lab)
+                {
+                    // ah so because no file-set response it breaks
+                    if (de.Responses.Count > 0)
+                    {
+                        DialogueEntry d = de.Responses[i];
+                        NextDialogue(de.Responses[i].Next); // if actual respons
+                    }
+                    else
+                    {
+                        NextDialogue(de.Next);
+                    }                    
+
+                    break;
+                }
             }
         }
-    }
+        #endregion
 
-    public void _on_Next_pressed()
-    {
-        SetDisplayedDialogue(ActiveText.Next);
-    }
-
-    public void _on_Exit_pressed()
-    {
-        this.Modulate = new Color (0, 0, 0, 0);
-    }
-
+        #region hover identify
     public void _on_MarginContainer_mouse_entered()
     {
-        NamePlate.Modulate = new Color (1,1,1,1);
+        //NamePlate.Show();
     }
 
     public void _on_MarginContainer_mouse_exited()
     {
-        NamePlate.Modulate = new Color (0,0,0,0);
+        //NamePlate.Hide();
     }
+    #endregion
+
+    #endregion
 }

@@ -4,7 +4,7 @@
 
 [sub_resource type="Theme" id=1]
 
-[node name="Control" type="Control"]
+[node name="DialougeBox" type="Control"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -53,7 +53,7 @@ rect_min_size = Vector2( 0, 60 )
 [node name="ResponseContainer" type="VBoxContainer" parent="VBox"]
 margin_top = 100.0
 margin_right = 85.0
-margin_bottom = 150.0
+margin_bottom = 168.0
 size_flags_horizontal = 5
 size_flags_vertical = 5
 alignment = 1
@@ -76,25 +76,11 @@ margin_right = 85.0
 margin_bottom = 50.0
 text = "Response 3"
 
-[node name="TESTButtons" type="VBoxContainer" parent="VBox"]
-margin_top = 154.0
+[node name="Label4" type="Label" parent="VBox/ResponseContainer"]
+margin_top = 54.0
 margin_right = 85.0
-margin_bottom = 198.0
-size_flags_vertical = 4
-alignment = 1
-
-[node name="Next" type="Button" parent="VBox/TESTButtons"]
-margin_right = 85.0
-margin_bottom = 20.0
-text = "Continue"
-
-[node name="Exit" type="Button" parent="VBox/TESTButtons"]
-margin_top = 24.0
-margin_right = 85.0
-margin_bottom = 44.0
-text = "Bye"
+margin_bottom = 68.0
+text = "..."
 
 [connection signal="mouse_entered" from="VBox/MarginContainer" to="." method="_on_MarginContainer_mouse_entered"]
 [connection signal="mouse_exited" from="VBox/MarginContainer" to="." method="_on_MarginContainer_mouse_exited"]
-[connection signal="pressed" from="VBox/TESTButtons/Next" to="." method="_on_Next_pressed"]
-[connection signal="pressed" from="VBox/TESTButtons/Exit" to="." method="_on_Exit_pressed"]

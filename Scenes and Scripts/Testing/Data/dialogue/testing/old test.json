@@ -1,13 +1,13 @@
 {
 	"00000000" : {
-		"name":"Player", 
-		"text":"Hello. I'm Player. Who are you?",
+		"name":"Stranger", 
+		"text":"Hello. Who are you?",
 		"next": "00000001",
 		"responses" : []
 	},
 	"00000001" : {
 		"name":"Adventurer", 
-		"text":"That's a complicated question...",
+		"text":"My own identity is a rathole.",
 		"next": "00000002",
 		"responses" : []
 	},
