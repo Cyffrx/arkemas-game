@@ -1,0 +1,19 @@
+[gd_scene format=2]
+
+[node name="Actor" type="KinematicBody2D"]
+
+[node name="StateMachine" type="Node" parent="."]
+
+[node name="Idling" type="Node" parent="StateMachine"]
+
+[node name="Staggered" type="Node" parent="StateMachine"]
+
+[node name="Dying" type="Node" parent="StateMachine"]
+
+[node name="Dead" type="Node" parent="StateMachine"]
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
