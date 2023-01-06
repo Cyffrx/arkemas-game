@@ -9,10 +9,7 @@ public class PlayerDodging : PlayerState
 		base.OnStart(message);
 		
 		if (PSM.CharacterAttributes["Stamina"].Value == PSM.CharacterAttributes["Stamina"].Min)
-		{
-			GD.Print("Player does not have enough stamina to dodge.");
 			PSM.ChangeState("PlayerIdling");
-		}
 		else
 		{
 			PSM.CharacterAttributes["Stamina"].Value -= PSM.CharacterAttributes["Dodge Stamina Cost"].Value;

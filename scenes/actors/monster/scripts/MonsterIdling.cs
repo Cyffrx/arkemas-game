@@ -17,9 +17,16 @@ public class MonsterIdling : MonsterState
 		base.UpdateState(_delta);
 		
 		MSM.AnimPlayer.Play("idle");
-
-		if (MSM.Target.Position.Round() != MSM.Body.Position.Round())
+		if (MSM.PlayerDetected ||
+			MSM.Body.Position.DistanceTo(MSM.Target.Position) > 50.0f)
 			MSM.ChangeState("MonsterMoving");
+	}
+
+	public override void OnExit(string nextState)
+	{
+		base.OnExit(nextState);
+
+		MSM.Timers["Boredem"].Stop();
 	}
 
 	private void _on_Boredem_timeout()
@@ -31,12 +38,16 @@ public class MonsterIdling : MonsterState
 
 		// 200 is the detectionRadius. this shouldn't be hardcoded, but oh well
 		float detectionRadius = 100.0f;
-		float radius = MSM.RNG.RandfRange(-1.0f, 1.0f) * detectionRadius;
+		float rand = MSM.RNG.RandfRange(-1.0f, 1.0f); // get a randomized rotation
+		float dist = Math.Abs(rand) * detectionRadius; // total distance to travel
+		float radius = dist > 100.0f ? dist : 100.0f; // minimum distance 50.0f
 
 		// pick a random point within bounds
 		Vector2 vec = Vector2.Zero;
 		vec.x = MSM.RNG.RandfRange(-detectionRadius, detectionRadius);
 		vec.y = MSM.RNG.RandfRange(-detectionRadius, detectionRadius);
 		MSM.Target.Position = vec;
+
+		MSM.Timers["Boredem"].Start();
 	}
 }

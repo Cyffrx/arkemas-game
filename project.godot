@@ -24,6 +24,7 @@ window/stretch/aspect="keep"
 [global]
 
 background=false
+editor=false
 
 [importer_defaults]
 

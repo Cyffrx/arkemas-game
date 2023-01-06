@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/actors/player/playerSprite.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/player/state machine/PlayerStateMachine.cs" type="Script" id=2]
@@ -8,11 +8,14 @@
 [ext_resource path="res://scenes/actors/player/state machine/PlayerDodging.cs" type="Script" id=6]
 [ext_resource path="res://scenes/actors/player/state machine/PlayerAttacking.cs" type="Script" id=7]
 [ext_resource path="res://scenes/actors/player/state machine/PlayerStaggered.cs" type="Script" id=8]
-[ext_resource path="res://scenes/actors/emissionLight.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/player/playerLight.png" type="Texture" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
 height = 14.0
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 9.5, 13.6863 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -27,6 +30,66 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/AttackRadius/CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 21, -9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/AttackRadius/CollisionShape2D:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -24.8989 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite/AttackRadius/CollisionShape2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite/AttackRadius/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite/AttackRadius/CollisionShape2D:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 2 ) ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -43,6 +106,66 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 14, 15, 16, 18, 19, 20, 21, 22, 23, 25, 15, 14 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/AttackRadius/CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.333333, 0.666666 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 21.2659, -8.42717 ), Vector2( -0.124098, -11.4465 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/AttackRadius/CollisionShape2D:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.333333, 0.666666 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ -24.8989, -68.3386 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite/AttackRadius/CollisionShape2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.333333, 0.498, 0.666666, 0.747 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite/AttackRadius/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.333333, 0.498, 0.666666, 0.747 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite/AttackRadius/CollisionShape2D:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.333333, 0.666666 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 2 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -118,12 +241,25 @@ script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 8, -5 )
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 17
+
+[node name="AttackRadius" type="Area2D" parent="Sprite"]
+position = Vector2( -8, 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/AttackRadius"]
+position = Vector2( 21, -9 )
+rotation = -0.434568
+scale = Vector2( 1, 2 )
+shape = SubResource( 7 )
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )
@@ -134,8 +270,11 @@ anims/move = SubResource( 4 )
 
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 9 )
-texture_scale = 0.15
+texture_scale = 0.2
 shadow_enabled = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [connection signal="animation_finished" from="AnimationPlayer" to="State Machine/PlayerDodging" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="State Machine/PlayerAttacking" method="_on_AnimationPlayer_animation_finished"]

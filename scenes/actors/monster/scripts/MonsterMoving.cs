@@ -9,29 +9,32 @@ public class MonsterMoving : MonsterState
 		base.OnStart(message);
 
 		MSM.Sightline.CastTo = MSM.Target.Position;
-		MSM.Sightline.Enabled = true;
 	}
 
 	public override void UpdateState(float _delta)
 	{
 		base.UpdateState(_delta);
-		MSM.AnimPlayer.Play("move");
 
+		MSM.AnimPlayer.Play("move");
+		
+		// if player deteceted, fetch their location
 		if (MSM.PlayerDetected)
 			MSM.Target.Position = MSM.Goal.Position;
 		
-		MSM.Sightline.CastTo = -(MSM.Body.Position - MSM.Target.Position);
+		MSM.Sightline.CastTo = MSM.Body.ToLocal(MSM.Target.Position);
 
-		if (MSM.PlayerInAttackRange)
+		// if chasing and 50.0f units close, attack
+		if (MSM.PlayerDetected && MSM.Body.Position.DistanceTo(MSM.Target.Position) <= 50.0f)
 			MSM.ChangeState("MonsterAttacking");
-		
-		if (MSM.Body.Position.DistanceTo(MSM.Target.Position) > 10.0f)
+		// if over 50.0f units, chase
+		else if (MSM.Body.Position.DistanceTo(MSM.Target.Position) > 50.0f)
 		{
 			MSM.Velocity = MSM.Body.Position.DirectionTo(MSM.Target.Position).Normalized();
 			MSM.Body.MoveAndSlide(
 				MSM.Velocity * MSM.CharacterAttributes["Run Speed"].Value);
 			MSM.Sprite.FlipH = MSM.Velocity.x < 0;
 		}
+		// if under 50.0f units and not chasing, idle
 		else
 			MSM.ChangeState("MonsterIdling");
 				
@@ -40,7 +43,5 @@ public class MonsterMoving : MonsterState
 	public override void OnExit(string nextState)
 	{
 		base.OnExit(nextState);
-
-		MSM.Sightline.Enabled = false;
 	}
 }
